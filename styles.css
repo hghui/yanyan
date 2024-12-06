@@ -1,0 +1,443 @@
+/* 全局样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a1a2a 0%, #2d2d44 100%);
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 20%, rgba(255, 182, 193, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(173, 216, 230, 0.05) 0%, transparent 50%);
+    animation: backgroundShift 15s ease-in-out infinite alternate;
+    z-index: 0;
+}
+
+/* 主容器 */
+.container {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 6rem 2rem 2rem;
+    gap: 2rem;
+    background: rgba(17, 25, 40, 0.75);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.125);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* 主背景饰 */
+.container::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 20%, rgba(255, 182, 193, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(173, 216, 230, 0.05) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* 功能区样式 */
+.features-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 1200px;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 24px;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.2);
+}
+
+.feature-card {
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* Logo区域样式增强 */
+.logo-container {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    padding: 2.5rem 3.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.logo-wrapper {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.logo-icon {
+    font-size: 3.5rem;
+    font-weight: bold;
+    background: linear-gradient(135deg, 
+        rgba(255, 182, 193, 0.9),
+        rgba(173, 216, 230, 0.9)
+    );
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -ms-background-clip: text;
+    -o-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    z-index: 1;
+}
+
+.logo-icon .heart {
+    color: rgba(255, 182, 193, 0.9);
+    -webkit-text-fill-color: initial;
+    animation: heartbeat 1.5s ease infinite;
+    display: inline-block;
+}
+
+.logo-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150%;
+    height: 150%;
+    background: radial-gradient(
+        circle,
+        rgba(255, 182, 193, 0.2) 0%,
+        rgba(173, 216, 230, 0.2) 50%,
+        transparent 70%
+    );
+    filter: blur(20px);
+    animation: glowPulse 3s ease-in-out infinite alternate;
+}
+
+.slogan-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.slogan-text {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.slogan-text::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg,
+        rgba(255, 182, 193, 0.7),
+        rgba(173, 216, 230, 0.7)
+    );
+    transition: width 0.3s ease;
+}
+
+.slogan-wrapper:hover .slogan-text::after {
+    width: 100%;
+}
+
+.slogan-divider {
+    color: rgba(255, 182, 193, 0.7);
+    animation: dividerGlow 2s ease-in-out infinite alternate;
+}
+
+/* 动画效果 */
+@keyframes backgroundShift {
+    0% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    14% { transform: scale(1.3); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.3); }
+    70% { transform: scale(1); }
+}
+
+@keyframes glowPulse {
+    0% {
+        opacity: 0.3;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    100% {
+        opacity: 0.6;
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+}
+
+@keyframes dividerGlow {
+    from { text-shadow: 0 0 5px rgba(255, 182, 193, 0.5); }
+    to { text-shadow: 0 0 15px rgba(255, 182, 193, 0.8); }
+}
+
+/* 按钮容器样式增强 */
+.button-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 800px;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.button-container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+        circle,
+        rgba(255, 182, 193, 0.1) 0%,
+        rgba(173, 216, 230, 0.1) 30%,
+        transparent 70%
+    );
+    animation: containerGlow 10s ease-in-out infinite alternate;
+}
+
+@keyframes containerGlow {
+    0% {
+        transform: translate(0, 0);
+        opacity: 0.3;
+    }
+    100% {
+        transform: translate(-25%, -25%);
+        opacity: 0.6;
+    }
+}
+
+/* 响应式调整优化 */
+@media (max-width: 768px) {
+    .container {
+        padding: 4rem 1rem 1rem;
+    }
+
+    .features-container {
+        padding: 0.8rem;
+    }
+
+    .logo-container {
+        padding: 1.5rem 2rem;
+    }
+}
+
+/* 功能按钮样式 */
+.glass-btn {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 2rem;
+    width: 100%;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* 按钮内部光效 */
+.glass-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.1),
+        rgba(255, 255, 255, 0.05) 50%,
+        transparent
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.glass-btn::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.1) 0%,
+        transparent 60%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+/* 按钮图标样式 */
+.btn-icon {
+    font-size: 2.5rem;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease;
+}
+
+/* 每日情话按钮样式 */
+.glass-btn:nth-child(1) {
+    background: linear-gradient(
+        135deg,
+        rgba(255, 182, 193, 0.1),
+        rgba(255, 255, 255, 0.05)
+    );
+    border-color: rgba(255, 182, 193, 0.2);
+    box-shadow: 0 8px 32px rgba(255, 182, 193, 0.1);
+}
+
+.glass-btn:nth-child(1) .btn-icon {
+    animation: floatIcon 3s ease-in-out infinite;
+}
+
+/* 美食百科按钮样式 */
+.glass-btn:nth-child(2) {
+    background: linear-gradient(
+        135deg,
+        rgba(173, 216, 230, 0.1),
+        rgba(255, 255, 255, 0.05)
+    );
+    border-color: rgba(173, 216, 230, 0.2);
+    box-shadow: 0 8px 32px rgba(173, 216, 230, 0.1);
+}
+
+.glass-btn:nth-child(2) .btn-icon {
+    animation: floatIcon 3s ease-in-out infinite 0.5s;
+}
+
+/* 悬浮效果 */
+.glass-btn:hover {
+    transform: translateY(-5px) scale(1.02);
+}
+
+.glass-btn:hover::before {
+    opacity: 1;
+}
+
+.glass-btn:hover::after {
+    opacity: 0.5;
+    animation: glowRotate 10s linear infinite;
+}
+
+.glass-btn:hover .btn-icon {
+    transform: scale(1.1);
+}
+
+/* 每日情话按钮悬浮效果 */
+.glass-btn:nth-child(1):hover {
+    background: linear-gradient(
+        135deg,
+        rgba(255, 182, 193, 0.15),
+        rgba(255, 255, 255, 0.08)
+    );
+    box-shadow: 
+        0 15px 40px rgba(255, 182, 193, 0.2),
+        inset 0 0 20px rgba(255, 182, 193, 0.1);
+}
+
+/* 美食百科按钮悬浮效果 */
+.glass-btn:nth-child(2):hover {
+    background: linear-gradient(
+        135deg,
+        rgba(173, 216, 230, 0.15),
+        rgba(255, 255, 255, 0.08)
+    );
+    box-shadow: 
+        0 15px 40px rgba(173, 216, 230, 0.2),
+        inset 0 0 20px rgba(173, 216, 230, 0.1);
+}
+
+/* 按钮动画 */
+@keyframes floatIcon {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes glowRotate {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* 点击效果 */
+.glass-btn:active {
+    transform: translateY(0) scale(0.98);
+    transition: transform 0.1s ease;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .glass-btn {
+        padding: 1.5rem;
+        font-size: 1.1rem;
+    }
+
+    .btn-icon {
+        font-size: 2rem;
+    }
+}
