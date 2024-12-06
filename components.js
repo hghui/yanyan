@@ -278,215 +278,109 @@ document.head.appendChild(styleSheet);
 // 百科 API 集成
 async function fetchAndShowFoodList() {
     const pageBody = document.getElementById('wiki-page-body');
+    if (!pageBody) return;
 
-    // 创建搜索界面
-    const searchUI = `
-        <div class="search-container">
-            <div class="search-tabs">
-                <button class="tab-btn active" data-tab="food">
-                    <span class="tab-icon">🍽️</span>
-                    美食搜索
-                </button>
-                <button class="tab-btn" data-tab="disease">
-                    <span class="tab-icon">💊</span>
-                    病症搜索
-                </button>
+    showLoading(pageBody, '正在加载...');
+
+    try {
+        // 显示搜索界面
+        pageBody.innerHTML = `
+            <div class="search-container">
+                <input type="text" id="food-search" placeholder="搜索美食..." class="search-input">
+                <button onclick="searchFood()" class="search-btn">搜索</button>
             </div>
-            <div id="foodSearch" class="search-panel active">
-                <div class="search-box">
-                    <input type="text" class="search-input" placeholder="输入食物名称..." />
-                    <button class="wiki-search-btn" onclick="searchFood(1)">
-                        <span class="wiki-icon">🔍</span>
-                        <span>搜索</span>
-                    </button>
+            <div id="food-results" class="food-results">
+                <div class="welcome-message">
+                    <p>欢迎使用美食百科</p>
+                    <p class="tip">输入食物名称开始搜索，例如：苹果、米饭、牛肉...</p>
                 </div>
             </div>
-            <div id="diseaseSearch" class="search-panel">
-                <div class="search-box">
-                    <input type="text" class="search-input" placeholder="输入病症名称..." />
-                    <button class="wiki-search-btn" onclick="showComingSoon()">
-                        <span class="wiki-icon">🔍</span>
-                        <span>搜索</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div id="searchResults" class="food-list"></div>
-        <div id="loadingMore" class="loading-more" style="display: none;">
-            <div class="loading-spinner"></div>
-            <span>加载更多...</span>
-        </div>
-    `;
+        `;
 
-    pageBody.innerHTML = searchUI;
-
-    // 添加鼠标移动效果
-    const searchBtns = pageBody.querySelectorAll('.wiki-search-btn');
-    searchBtns.forEach(btn => {
-        btn.addEventListener('mousemove', (e) => {
-            const rect = btn.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            btn.style.setProperty('--mouse-x', `${x}px`);
-            btn.style.setProperty('--mouse-y', `${y}px`);
-        });
-    });
-
-    // 添加输入监听
-    const searchBoxes = pageBody.querySelectorAll('.search-box');
-    searchBoxes.forEach(box => {
-        const input = box.querySelector('.search-input');
-        input.addEventListener('input', () => {
-            if (input.value.trim()) {
-                box.classList.add('has-content');
-            } else {
-                box.classList.remove('has-content');
+        // 添加回车搜索功能
+        const searchInput = document.getElementById('food-search');
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                searchFood();
             }
         });
-    });
-
-    // 添加标签切换事件
-    const tabs = pageBody.querySelectorAll('.tab-btn');
-    tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            // 移除所有活动状态
-            tabs.forEach(t => t.classList.remove('active'));
-            const panels = pageBody.querySelectorAll('.search-panel');
-            panels.forEach(p => p.classList.remove('active'));
-
-            // 添加当前活动状态
-            tab.classList.add('active');
-            const targetPanel = document.getElementById(`${tab.dataset.tab}Search`);
-            targetPanel.classList.add('active');
-
-            // 清空搜索结果
-            const resultsContainer = document.getElementById('searchResults');
-            resultsContainer.innerHTML = '';
-            const loadingMore = document.getElementById('loadingMore');
-            loadingMore.style.display = 'none';
-        });
-    });
-
-    // 添加入框回车事件
-    const foodInput = pageBody.querySelector('#foodSearch .search-input');
-    foodInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            searchFood(1);
-        }
-    });
-
-    // 添加滚动加载
-    pageBody.addEventListener('scroll', () => {
-        const loadingMore = document.getElementById('loadingMore');
-        if (!loadingMore || loadingMore.style.display === 'none') return;
-
-        const scrollPosition = pageBody.scrollTop + pageBody.clientHeight;
-        const scrollHeight = pageBody.scrollHeight;
-
-        if (scrollPosition >= scrollHeight - 100) {
-            const currentPage = parseInt(pageBody.dataset.currentPage || '1');
-            searchFood(currentPage + 1);
-        }
-    });
+    } catch (error) {
+        console.error('初始化失败:', error);
+        showNotification('加载失败，请重试', 3000, 'error');
+    }
 }
 
 let isSearching = false;
-async function searchFood(page = 1) {
-    if (isSearching) return;
-
-    const searchInput = document.getElementById('foodSearch');
-    const resultsContainer = document.getElementById('searchResults');
-    const loadingMore = document.getElementById('loadingMore');
-    const keyword = searchInput.value.trim();
-
-    if (!keyword) {
-        showNotification('请输入食物名称', 3000, 'info');
+async function searchFood() {
+    const searchInput = document.getElementById('food-search');
+    const searchTerm = searchInput.value.trim();
+    const foodResults = document.getElementById('food-results');
+    
+    if (!searchTerm) {
+        showNotification('请输入搜索关键词');
         return;
     }
 
-    if (page === 1) {
-        showLoading(resultsContainer, '正在搜索...', 'wiki-theme');
-    }
-
-    isSearching = true;
-
+    showLoading(foodResults, '正在搜索美食...');
+    
     try {
         const corsProxy = 'https://api.allorigins.win/raw?url=';
-        const apiUrl = `https://www.mxnzp.com/api/food_heat/food/search?keyword=${encodeURIComponent(keyword)}&page=${page}&limit=3&app_id=lfjqxgttlgqeokjr&app_secret=qbNUu3JhZJUrXW7oSU9KJsD3nDoFKk7K`;
-
+        const apiUrl = `https://www.mxnzp.com/api/food_heat/food/search?keyword=${encodeURIComponent(searchTerm)}&page=1&limit=10&app_id=lfjqxgttlgqeokjr&app_secret=qbNUu3JhZJUrXW7oSU9KJsD3nDoFKk7K`;
+        
         const response = await fetch(corsProxy + encodeURIComponent(apiUrl));
         const data = await response.json();
+        
         if (data.code === 1) {
-            if (page === 1) {
-                resultsContainer.innerHTML = '';
-            }
-
-            if (data.data.list.length === 0 && page === 1) {
-                resultsContainer.innerHTML = `
-                    <div class="no-results">
-                        <p>未找到"${keyword}"相关的食物</p>
-                        <p class="suggestion">试试其他关键词比如"苹果"、"米饭"等</p>
-                    </div>
-                `;
-                loadingMore.style.display = 'none';
-                return;
-            }
-
-            data.data.list.forEach(food => {
-                const foodItem = document.createElement('div');
-                foodItem.className = 'food-item glass-card';
-                foodItem.innerHTML = `
-                    <div class="food-item-content">
-                        <h3>${food.name}</h3>
-                        <div class="food-info">
-                            <span class="food-calory">🔥 ${food.calory || '暂无'} 千卡/100g</span>
-                            <span class="food-view">点击查看详情 →</span>
-                        </div>
-                    </div>
-                `;
-                foodItem.onclick = () => showFoodDetail(food.foodId);
-                resultsContainer.appendChild(foodItem);
-            });
-
-            const pageBody = document.getElementById('wiki-page-body');
-            pageBody.dataset.currentPage = page.toString();
-
-            // 更新加载更多状态
-            if (data.data.list.length === 3) {
-                loadingMore.style.display = 'flex';
-                loadingMore.classList.remove('loading-complete');
-            } else {
-                loadingMore.classList.add('loading-complete');
-                loadingMore.innerHTML = `
-                    <div class="loading-end">
-                        <span class="end-line"></span>
-                        <span class="end-text">已经到底啦</span>
-                        <span class="end-line"></span>
-                    </div>
-                `;
-            }
+            displayFoodResults(data.data.list);
         } else {
             throw new Error(data.msg || '搜索失败');
         }
     } catch (error) {
-        if (page === 1) {
-            resultsContainer.innerHTML = `
-                <div class="error">
-                    <p>抱歉，搜索遇到了问题</p>
-                    <p class="error-detail">${error.message}</p>
-                    <button class="glass-btn blue-btn" onclick="searchFood(1)">
-                        <span class="retry-icon">🔄</span>
-                        重新搜索
-                    </button>
-                </div>
-            `;
-        }
-        showNotification('搜索失败，请重试', 3000, 'error');
-        console.error('搜索失败:', error);
-    } finally {
-        isSearching = false;
+        foodResults.innerHTML = `
+            <div class="error-message">
+                <p>搜索失败</p>
+                <p class="error-detail">${error.message}</p>
+                <button class="glass-btn" onclick="searchFood()">重试</button>
+            </div>
+        `;
+        showNotification('搜索失败，请稍后重试', 3000, 'error');
+        console.error('搜索出错:', error);
     }
 }
+
+function displayFoodResults(results) {
+    const foodResults = document.getElementById('food-results');
+    
+    if (!results || results.length === 0) {
+        foodResults.innerHTML = `
+            <div class="no-results">
+                <p>未找到相关美食</p>
+                <p class="suggestion">试试其他关键词，例如：苹果、米饭、牛肉...</p>
+            </div>
+        `;
+        return;
+    }
+
+    const resultsHtml = results.map(food => `
+        <div class="food-item glass-card" onclick="showFoodDetail('${food.foodId}')">
+            <div class="food-item-header">
+                <h3>${food.name}</h3>
+                <span class="calory">${food.calory || '0'} 千卡/100g</span>
+            </div>
+            <div class="food-item-nutrients">
+                <span class="nutrient">蛋白质: ${food.protein || '0'}g</span>
+                <span class="nutrient">脂肪: ${food.fat || '0'}g</span>
+                <span class="nutrient">碳水: ${food.carbohydrate || '0'}g</span>
+            </div>
+            <div class="food-item-footer">
+                <span class="view-detail">点击查看详情 →</span>
+            </div>
+        </div>
+    `).join('');
+    
+    foodResults.innerHTML = resultsHtml;
+}
+
 // 修改通用信息窗组件
 function showInfoDialog({ title, content, theme = 'default' }) {
     const dialog = document.createElement('div');
@@ -495,7 +389,9 @@ function showInfoDialog({ title, content, theme = 'default' }) {
         <div class="info-dialog glass-card">
             <div class="info-dialog-header">
                 <h3>${title}</h3>
-                <button class="glass-btn close-btn" onclick="closeInfoDialog(this)">×</button>
+                <button class="close-btn" onclick="closeInfoDialog(this)">
+                    <span>×</span>
+                </button>
             </div>
             <div class="info-dialog-content">
                 ${content}
@@ -515,18 +411,40 @@ function closeInfoDialog(btn) {
 
 // 修改食物详情函数
 async function showFoodDetail(foodId) {
+    // 先创建弹窗，显示加载动画
+    showInfoDialog({
+        title: '食物详情',
+        content: `
+            <div class="detail-loading-container">
+                <div class="detail-loading-spinner">
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                </div>
+                <div class="detail-loading-text">
+                    <span>正在获取详情</span>
+                    <div class="loading-dots">
+                        <span>.</span><span>.</span><span>.</span>
+                    </div>
+                </div>
+            </div>
+        `,
+        theme: 'wiki'
+    });
+
     try {
         const corsProxy = 'https://api.allorigins.win/raw?url=';
         const apiUrl = `https://www.mxnzp.com/api/food_heat/food/details?foodId=${foodId}&app_id=lfjqxgttlgqeokjr&app_secret=qbNUu3JhZJUrXW7oSU9KJsD3nDoFKk7K`;
-
+        
         const response = await fetch(corsProxy + encodeURIComponent(apiUrl));
         const data = await response.json();
-
-        if (data.code === 1 && data.data) {
+        
+        if (data.code === 1) {
             const food = data.data;
-            showInfoDialog({
-                title: food.name,
-                content: `
+            // 更新弹窗内容
+            const dialog = document.querySelector('.info-dialog-content');
+            if (dialog) {
+                dialog.innerHTML = `
                     <div class="food-detail-container">
                         <div class="food-header">
                             <span class="food-icon">🍽️</span>
@@ -587,13 +505,23 @@ async function showFoodDetail(foodId) {
                             </div>
                         ` : ''}
                     </div>
-                `,
-                theme: 'wiki'
-            });
+                `;
+            }
         } else {
-            throw new Error(data.msg || '获取情失败');
+            throw new Error(data.msg || '获取失败');
         }
     } catch (error) {
+        const dialog = document.querySelector('.info-dialog-content');
+        if (dialog) {
+            dialog.innerHTML = `
+                <div class="detail-error-container">
+                    <div class="error-icon">❌</div>
+                    <div class="error-message">获取详情失败</div>
+                    <div class="error-detail">${error.message}</div>
+                    <button class="retry-btn" onclick="showFoodDetail('${foodId}')">重试</button>
+                </div>
+            `;
+        }
         showNotification('获取食物详情失败，请重试', 3000, 'error');
         console.error('获取详情失败:', error);
     }
@@ -604,7 +532,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const logo = document.querySelector('.logo-container');
     let timer;
 
-    // 悬浮显示计时器
+    // ��浮显示计时器
     logo.addEventListener('mouseenter', () => {
         timer = setTimeout(() => {
             const content = getLoveTimerContent();
@@ -644,32 +572,49 @@ function getLoveTimerContent() {
     const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
     return `
-        <div class="timer-container">
-            <div class="timer-header">
-                <span class="timer-icon">💑</span>
-                <p>在一起已经...</p>
+        <div class="timer-split-layout">
+            <!-- 左侧计时器 -->
+            <div class="timer-panel">
+                
+                <div class="days-counter">
+                    <span class="days-number">${days}</span>
+                    <span class="days-label">天</span>
+                </div>
+                
+                <div class="time-grid">
+                    <div class="time-item">
+                        <span class="time-number">${hours}</span>
+                        <span class="time-label">小时</span>
+                    </div>
+                    <div class="time-item">
+                        <span class="time-number">${minutes}</span>
+                        <span class="time-label">分钟</span>
+                    </div>
+                    <div class="time-item">
+                        <span class="time-number">${seconds}</span>
+                        <span class="time-label">秒</span>
+                    </div>
+                </div>
             </div>
-            <div class="timer-grid">
-                <div class="timer-item">
-                    <span class="timer-number">${days}</span>
-                    <span class="timer-label">天</span>
+
+            <!-- 右侧文案 -->
+            <div class="message-panel">
+                <div class="message-header">
+                    <span class="message-icon">💌</span>
+                    <h3>爱的时光</h3>
                 </div>
-                <div class="timer-item">
-                    <span class="timer-number">${hours}</span>
-                    <span class="timer-label">小时</span>
+                
+                <div class="message-content">
+                    <div class="start-date">
+                        <span class="date-label">开始于</span>
+                        <span class="date">2022年8月19日</span>
+                    </div>
+                    
+                    <div class="love-quote">
+                        <p>愿时光待你我温柔</p>
+                        <p>未来的每一天都充满爱与幸福</p>
+                    </div>
                 </div>
-                <div class="timer-item">
-                    <span class="timer-number">${minutes}</span>
-                    <span class="timer-label">分钟</span>
-                </div>
-                <div class="timer-item">
-                    <span class="timer-number">${seconds}</span>
-                    <span class="timer-label">秒</span>
-                </div>
-            </div>
-            <div class="timer-footer">
-                <p>从 2022年8月19日 开始</p>
-                <p class="timer-quote">愿时光待你我温柔，未来的每一天都充满爱与幸福</p>
             </div>
         </div>
     `;
@@ -702,9 +647,19 @@ function closeDialog(btn) {
 }
 
 // 添加通用加载状态组件
-function showLoading(container, text = '加载中...', theme = '') {
+function showLoading(container, text = '加载中...') {
+    // 创建随机数量的粒子
+    const particles = Array.from({ length: 8 }, (_, i) => {
+        const left = Math.random() * 100;
+        const top = Math.random() * 100;
+        return `<div class="particle" style="left: ${left}%; top: ${top}%;"></div>`;
+    }).join('');
+
     container.innerHTML = `
-        <div class="loading-container ${theme}">
+        <div class="loading-container">
+            <div class="loading-particles">
+                ${particles}
+            </div>
             <div class="loading-spinner"></div>
             <div class="loading-text">${text}</div>
         </div>
