@@ -62,28 +62,204 @@ body::before {
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* 右侧面板样式 */
+/* 右侧面板样式优化 */
 .right-panel {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
     padding: 2rem;
     position: relative;
 }
 
 /* 功能按钮容器样式优化 */
 .button-container {
-    width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    padding: 3rem;
-    background: rgba(255, 255, 255, 0.02);
-    backdrop-filter: blur(12px);
-    border-radius: 28px;
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.8rem;
+    padding: 0.5rem;
     position: relative;
+}
+
+/* 功能按钮基础样式 */
+.glass-btn {
+    position: relative;
+    padding: 2.5rem 2rem;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
     overflow: hidden;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 按钮内容布局 */
+.btn-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* 信封线条装饰 */
+.envelope-line {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.envelope-line::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 1px solid rgba(255, 182, 193, 0.2);
+    border-radius: 24px;
+    transition: all 0.4s ease;
+}
+
+/* 蓝色信封样式 */
+.envelope-line.blue::before {
+    border-color: rgba(173, 216, 230, 0.2);
+}
+
+/* 发光效果 */
+.envelope-glow {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    color: rgba(255, 182, 193, 0.5);
+}
+
+.envelope-glow.blue {
+    color: rgba(173, 216, 230, 0.5);
+}
+
+.envelope-glow::before {
+    content: '';
+    position: absolute;
+    inset: -20px;
+    background: radial-gradient(
+        circle at center,
+        currentColor 0%,
+        transparent 70%
+    );
+    opacity: 0.1;
+}
+
+/* 悬浮效果 */
+.glass-btn:hover {
+    transform: translateY(-5px);
+}
+
+.glass-btn:hover .envelope-glow {
+    opacity: 1;
+    animation: glowPulse 2s ease-in-out infinite alternate;
+}
+
+/* 粉色按钮悬浮效果 */
+.glass-btn:nth-child(1):hover {
+    background: linear-gradient(
+        135deg,
+        rgba(255, 182, 193, 0.12),
+        rgba(255, 255, 255, 0.03)
+    );
+    box-shadow: 
+        0 15px 40px rgba(255, 182, 193, 0.15),
+        0 5px 15px rgba(255, 182, 193, 0.1);
+}
+
+.glass-btn:nth-child(1):hover .envelope-line::before {
+    border-color: rgba(255, 182, 193, 0.4);
+    transform: scale(0.96);
+}
+
+/* 蓝色按钮悬浮效果 */
+.glass-btn:nth-child(2):hover {
+    background: linear-gradient(
+        135deg,
+        rgba(173, 216, 230, 0.12),
+        rgba(255, 255, 255, 0.03)
+    );
+    box-shadow: 
+        0 15px 40px rgba(173, 216, 230, 0.15),
+        0 5px 15px rgba(173, 216, 230, 0.1);
+}
+
+.glass-btn:nth-child(2):hover .envelope-line.blue::before {
+    border-color: rgba(173, 216, 230, 0.4);
+    transform: scale(0.96);
+}
+
+/* 图标样式优化 */
+.btn-icon {
+    font-size: 2.8rem;
+    transition: transform 0.4s ease;
+}
+
+/* 标题样式 */
+.btn-title {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+}
+
+/* 描述文本 */
+.btn-description {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.6;
+}
+
+/* 装饰效果 */
+.btn-decoration {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+/* 动画效果 */
+@keyframes glowPulse {
+    0% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0.8;
+        transform: scale(1.05);
+    }
+}
+
+/* 响应式调整 */
+@media (max-width: 1200px) {
+    .button-container {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .right-panel {
+        padding: 1rem;
+    }
+    
+    .glass-btn {
+        min-height: 180px;
+        padding: 1.5rem;
+    }
+    
+    .btn-icon {
+        font-size: 2.4rem;
+    }
+    
+    .btn-title {
+        font-size: 1.2rem;
+    }
 }
 
 /* 分隔线装饰 */
@@ -428,7 +604,7 @@ body::before {
     }
 }
 
-/* 按钮容器样式增强 */
+/* 按钮容器样式 */
 .button-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -618,1581 +794,147 @@ body::before {
         inset 0 0 20px rgba(255, 182, 193, 0.1);
 }
 
-/* 美食百科按钮悬效果 */
-.glass-btn:nth-child(2):hover {
-    background: linear-gradient(
-        135deg,
-        rgba(173, 216, 230, 0.15),
-        rgba(255, 255, 255, 0.08)
-    );
-    box-shadow: 
-        0 15px 40px rgba(173, 216, 230, 0.2),
-        inset 0 0 20px rgba(173, 216, 230, 0.1);
-}
-
-/* 按钮动画 */
-@keyframes floatIcon {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
-
-@keyframes glowRotate {
-    0% { transform: translate(-50%, -50%) rotate(0deg); }
-    100% { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
-/* 点击效果 */
-.glass-btn:active {
-    transform: translateY(0) scale(0.98);
-    transition: transform 0.1s ease;
-}
-
-/* 响应式调整 */
-@media (max-width: 768px) {
-    .glass-btn {
-        padding: 1.5rem;
-        font-size: 1.1rem;
-    }
-
-    .btn-icon {
-        font-size: 2rem;
-    }
-}
-
-/* 搜索相关样式 */
-.search-container {
-    margin-bottom: 20px;
-    display: flex;
-    gap: 10px;
-}
-
-.search-input {
-    flex: 1;
-    padding: 8px 12px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 6px;
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
-    font-size: 1rem;
-}
-
-.search-input::placeholder {
-    color: rgba(255, 255, 255, 0.5);
-}
-
-.search-btn {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 6px;
-    background: rgba(255, 255, 255, 0.2);
-    color: #fff;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.search-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
-}
-
-/* 搜索结果样式 */
-.food-results {
-    margin-top: 20px;
-}
-
-.food-item {
-    padding: 1.5rem;
-    margin-bottom: 1rem;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.food-item:hover {
-    transform: translateY(-2px);
-    background: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-}
-
-.food-item-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-
-.food-item-header h3 {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 1.2rem;
-}
-
-.calory {
-    color: rgba(255, 182, 193, 0.9);
-    font-size: 0.9rem;
-    padding: 4px 8px;
-    background: rgba(255, 182, 193, 0.1);
-    border-radius: 4px;
-}
-
-.food-item-nutrients {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 1rem;
-}
-
-.nutrient {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.9rem;
-}
-
-.food-item-footer {
-    text-align: right;
-}
-
-.view-detail {
-    color: rgba(173, 216, 230, 0.9);
-    font-size: 0.9rem;
-}
-
-/* 提示信息样式 */
-.welcome-message, .no-results {
-    text-align: center;
-    padding: 2rem;
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.tip, .suggestion {
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 0.9rem;
-    margin-top: 0.5rem;
-}
-
-.error-message {
-    text-align: center;
-    padding: 2rem;
-    color: rgba(255, 182, 193, 0.9);
-}
-
-.error-detail {
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 0.9rem;
-    margin: 0.5rem 0 1rem;
-}
-
-/* 食物详情弹窗关闭按钮样式 */
-.info-dialog .close-btn {
-    position: relative;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(255, 255, 255, 0.05);
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    overflow: hidden;
-}
-
-.info-dialog .close-btn::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    background: radial-gradient(
-        circle,
-        rgba(255, 182, 193, 0.2) 0%,
-        transparent 70%
-    );
-    transform: translate(-50%, -50%);
-    transition: width 0.4s ease, height 0.4s ease;
-}
-
-.info-dialog .close-btn:hover {
-    transform: rotate(90deg);
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 182, 193, 0.3);
-    color: rgba(255, 182, 193, 0.9);
-}
-
-.info-dialog .close-btn:hover::before {
-    width: 150%;
-    height: 150%;
-}
-
-.info-dialog .close-btn:active {
-    transform: rotate(90deg) scale(0.9);
-    transition: transform 0.1s ease;
-}
-
-/* 添加关闭按钮的光晕效果 */
-.info-dialog .close-btn::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: conic-gradient(
-        from 0deg,
-        transparent,
-        rgba(255, 182, 193, 0.1),
-        transparent 60%
-    );
-    animation: rotateBorder 3s linear infinite;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.info-dialog .close-btn:hover::after {
-    opacity: 1;
-}
-
-@keyframes rotateBorder {
-    from {
-        transform: translate(-50%, -50%) rotate(0deg);
-    }
-    to {
-        transform: translate(-50%, -50%) rotate(360deg);
-    }
-}
-
-/* 食物详情弹窗样式 */
-.info-dialog.wiki-theme .info-dialog-content {
-    padding: 1.5rem;
-}
-
-/* 食物详情卡片样式 */
-.food-detail-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-/* 食物标题区域 */
-.food-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1.5rem;
-    padding: 1.5rem;
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 16px;
-    position: relative;
-    overflow: hidden;
-}
-
-.food-header::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(
-        circle at center,
-        rgba(255, 182, 193, 0.1),
-        transparent 70%
-    );
-    animation: rotateGlow 10s linear infinite;
-}
-
-.food-calory-big {
-    text-align: center;
-}
-
-.food-calory-big .number {
-    font-size: 2.5rem;
-    font-weight: bold;
-    background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    display: block;
-}
-
-.food-calory-big .unit {
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.6);
-    margin-top: 0.3rem;
-    display: block;
-}
-
-/* 营养成分网格 */
-.nutrition-grid {
+/* 功能按钮容器 */
+.button-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    margin: 1rem 0;
-}
-
-.nutrition-item {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-    padding: 1rem;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.nutrition-item:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-    background: rgba(255, 255, 255, 0.08);
-}
-
-.nutrition-icon {
-    font-size: 1.8rem;
-    margin-bottom: 0.5rem;
-    animation: floatIcon 3s ease-in-out infinite;
-}
-
-.nutrition-data {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-}
-
-.nutrition-data .value {
-    font-size: 1.2rem;
-    color: rgba(255, 255, 255, 0.9);
-}
-
-.nutrition-data .value small {
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.6);
-}
-
-.nutrition-data .label {
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.6);
-}
-
-/* 详细信息网格 */
-.details-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-}
-
-.detail-item {
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 12px;
-    padding: 1rem;
-    transition: all 0.3s ease;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.detail-item:hover {
-    background: rgba(255, 255, 255, 0.05);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-}
-
-.detail-header {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 0.8rem;
-}
-
-.detail-icon {
-    font-size: 1.2rem;
-}
-
-.detail-header h4 {
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 1rem;
-    font-weight: normal;
-}
-
-.detail-item p {
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 0.9rem;
-}
-
-/* 食物描述区域 */
-.food-description {
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 12px;
-    padding: 1.5rem;
-    margin-top: 1rem;
-    position: relative;
-    overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.food-description::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        45deg,
-        transparent,
-        rgba(255, 182, 193, 0.05),
-        transparent
-    );
-    transform: translateX(-100%);
-    animation: shimmer 3s infinite;
-}
-
-.description-header {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-}
-
-.description-icon {
-    font-size: 1.2rem;
-}
-
-.description-header h4 {
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 1rem;
-    font-weight: normal;
-}
-
-.food-description p {
-    color: rgba(255, 255, 255, 0.7);
-    line-height: 1.6;
-    font-size: 0.95rem;
-}
-
-/* 动画效果 */
-@keyframes rotateGlow {
-    from { transform: translate(-50%, -50%) rotate(0deg); }
-    to { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
-@keyframes shimmer {
-    0% { transform: translateX(-100%); }
-    50% { transform: translateX(100%); }
-    100% { transform: translateX(100%); }
-}
-
-@keyframes floatIcon {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
-}
-
-/* 响应式调整 */
-@media (max-width: 768px) {
-    .nutrition-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .food-calory-big .number {
-        font-size: 2rem;
-    }
-    
-    .food-header {
-        flex-direction: column;
-        gap: 1rem;
-        padding: 1rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .nutrition-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* 加载动画样式优化 */
-.loading-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
-    padding: 3rem;
+    padding: 2rem;
+    width: 100%;
+}
+
+/* 功能按钮基础样式 */
+.glass-btn {
     position: relative;
-    background: rgba(255, 255, 255, 0.02);
-    border-radius: 20px;
+    padding: 3rem 2rem;
+    background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-/* 主加载动画 */
-.loading-spinner {
-    position: relative;
-    width: 100px;
-    height: 100px;
-    transform-style: preserve-3d;
-    perspective: 1000px;
-}
-
-.loading-spinner::before,
-.loading-spinner::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    border: 3px solid transparent;
-    animation: spinnerRotate 3s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
-}
-
-.loading-spinner::before {
-    border-top-color: rgba(255, 182, 193, 0.8);
-    border-left-color: rgba(255, 182, 193, 0.3);
-    animation-delay: -0.3s;
-    filter: drop-shadow(0 0 10px rgba(255, 182, 193, 0.5));
-}
-
-.loading-spinner::after {
-    border-top-color: rgba(173, 216, 230, 0.8);
-    border-right-color: rgba(173, 216, 230, 0.3);
-    animation-delay: -0.15s;
-    filter: drop-shadow(0 0 10px rgba(173, 216, 230, 0.5));
-}
-
-/* 内部旋转光环 */
-.loading-spinner::before {
-    animation: spinnerRotate 2s ease-out infinite,
-             glowPulse 2s ease-in-out infinite alternate;
-}
-
-/* 加载文字效果 */
-.loading-text {
-    position: relative;
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 1.2rem;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-    letter-spacing: 1px;
-}
-
-.loading-text::before {
-    content: '';
-    position: absolute;
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 30px;
-    height: 2px;
-    background: linear-gradient(90deg,
-        transparent,
-        rgba(255, 255, 255, 0.5),
-        transparent
-    );
-}
-
-.loading-text::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg,
-        rgba(255, 182, 193, 0.7),
-        rgba(173, 216, 230, 0.7)
-    );
-    transform: scaleX(0);
-    transform-origin: left;
-    animation: loadingBar 2s ease-in-out infinite;
-}
-
-/* 装饰性粒子优化 */
-.loading-particles {
-    position: absolute;
-    width: 200%;
-    height: 200%;
-    top: -50%;
-    left: -50%;
-    pointer-events: none;
-    opacity: 0.6;
-}
-
-.particle {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: rgba(255, 182, 193, 0.6);
-    box-shadow: 0 0 10px rgba(255, 182, 193, 0.4);
-    animation: particleFloat 4s ease-in-out infinite;
-}
-
-.particle:nth-child(2n) {
-    background: rgba(173, 216, 230, 0.6);
-    box-shadow: 0 0 10px rgba(173, 216, 230, 0.4);
-    animation-duration: 6s;
-    animation-delay: -1s;
-}
-
-.particle:nth-child(3n) {
-    width: 6px;
-    height: 6px;
-    background: rgba(255, 255, 255, 0.6);
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
-    animation-duration: 5s;
-    animation-delay: -2s;
-}
-
-.particle:nth-child(4n) {
-    width: 4px;
-    height: 4px;
-    animation-duration: 7s;
-    animation-delay: -3s;
-}
-
-/* 动画关键帧优化 */
-@keyframes spinnerRotate {
-    0% {
-        transform: rotate(0deg) scale(1);
-    }
-    50% {
-        transform: rotate(180deg) scale(1.1);
-    }
-    100% {
-        transform: rotate(360deg) scale(1);
-    }
-}
-
-@keyframes glowPulse {
-    0% {
-        filter: drop-shadow(0 0 5px rgba(255, 182, 193, 0.3));
-    }
-    100% {
-        filter: drop-shadow(0 0 15px rgba(255, 182, 193, 0.6));
-    }
-}
-
-@keyframes loadingBar {
-    0% {
-        transform: scaleX(0);
-        opacity: 0.7;
-        background-position: 0% 50%;
-    }
-    50% {
-        transform: scaleX(1);
-        opacity: 1;
-        background-position: 100% 50%;
-    }
-    100% {
-        transform: scaleX(0);
-        opacity: 0.7;
-        transform-origin: right;
-        background-position: 0% 50%;
-    }
-}
-
-@keyframes particleFloat {
-    0%, 100% {
-        transform: translate(0, 0) scale(1) rotate(0deg);
-        opacity: 0.3;
-    }
-    25% {
-        transform: translate(20px, -30px) scale(1.2) rotate(90deg);
-        opacity: 0.8;
-    }
-    50% {
-        transform: translate(-20px, -50px) scale(1.4) rotate(180deg);
-        opacity: 0.5;
-    }
-    75% {
-        transform: translate(-30px, -20px) scale(1.2) rotate(270deg);
-        opacity: 0.8;
-    }
-}
-
-/* 容器呼吸动画优化 */
-@keyframes containerPulse {
-    0%, 100% {
-        transform: scale(1);
-        background: rgba(255, 255, 255, 0.02);
-    }
-    50% {
-        transform: scale(1.02);
-        background: rgba(255, 255, 255, 0.04);
-    }
-}
-
-/* 添加光晕效果 */
-.loading-container::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: conic-gradient(
-        from 0deg,
-        transparent,
-        rgba(255, 182, 193, 0.1),
-        rgba(173, 216, 230, 0.1),
-        transparent
-    );
-    animation: rotateGlow 10s linear infinite;
-    opacity: 0.5;
-}
-
-@keyframes rotateGlow {
-    from {
-        transform: translate(-50%, -50%) rotate(0deg);
-    }
-    to {
-        transform: translate(-50%, -50%) rotate(360deg);
-    }
-}
-
-/* 详情加载动画样式 */
-.detail-loading-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-    padding: 3rem 2rem;
-    min-height: 300px;
-    position: relative;
-}
-
-.detail-loading-spinner {
-    position: relative;
-    width: 80px;
-    height: 80px;
-}
-
-.spinner-ring {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    border: 3px solid transparent;
-    animation: detailSpinnerRotate 1.5s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-}
-
-.spinner-ring:nth-child(1) {
-    border-top-color: rgba(255, 182, 193, 0.8);
-    animation-delay: -0.45s;
-}
-
-.spinner-ring:nth-child(2) {
-    border-right-color: rgba(173, 216, 230, 0.8);
-    animation-delay: -0.3s;
-}
-
-.spinner-ring:nth-child(3) {
-    border-bottom-color: rgba(255, 255, 255, 0.8);
-    animation-delay: -0.15s;
-}
-
-.detail-loading-text {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 1.1rem;
-    letter-spacing: 1px;
-}
-
-.loading-dots {
-    display: inline-flex;
-}
-
-.loading-dots span {
-    opacity: 0;
-    animation: dotFade 1.5s infinite;
-    animation-fill-mode: both;
-}
-
-.loading-dots span:nth-child(1) { animation-delay: 0.2s; }
-.loading-dots span:nth-child(2) { animation-delay: 0.4s; }
-.loading-dots span:nth-child(3) { animation-delay: 0.6s; }
-
-/* 错误状态样式 */
-.detail-error-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    padding: 3rem 2rem;
-    text-align: center;
-}
-
-.error-icon {
-    font-size: 2.5rem;
-    animation: errorShake 0.8s ease-in-out;
-}
-
-.retry-btn {
-    margin-top: 1rem;
-    padding: 0.8rem 2rem;
-    border: none;
-    border-radius: 8px;
-    background: rgba(255, 182, 193, 0.2);
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.retry-btn:hover {
-    background: rgba(255, 182, 193, 0.3);
-    transform: translateY(-2px);
-}
-
-/* 动画关键帧 */
-@keyframes detailSpinnerRotate {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-@keyframes dotFade {
-    0%, 80%, 100% { 
-        opacity: 0;
-        transform: scale(0.8);
-    }
-    40% { 
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-@keyframes errorShake {
-    0%, 100% { transform: translateX(0); }
-    20% { transform: translateX(-10px); }
-    40% { transform: translateX(10px); }
-    60% { transform: translateX(-5px); }
-    80% { transform: translateX(5px); }
-}
-
-/* 添加渐变背景效果 */
-.detail-loading-container::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: conic-gradient(
-        from 0deg,
-        transparent,
-        rgba(255, 182, 193, 0.05),
-        rgba(173, 216, 230, 0.05),
-        transparent
-    );
-    animation: detailGlowRotate 10s linear infinite;
-    opacity: 0.5;
-}
-
-@keyframes detailGlowRotate {
-    from {
-        transform: translate(-50%, -50%) rotate(0deg);
-    }
-    to {
-        transform: translate(-50%, -50%) rotate(360deg);
-    }
-}
-
-/* 计时器容器样式 */
-.timer-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-    padding: 2rem 1.5rem;
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 20px;
+    border-radius: 24px;
     border: 1px solid rgba(255, 255, 255, 0.08);
-    position: relative;
+    cursor: pointer;
     overflow: hidden;
-    margin: 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* 计时器头部样式 */
-.timer-header {
+/* 按钮内容布局 */
+.btn-content {
+    position: relative;
+    z-index: 2;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1.2rem;
-    width: 100%;
 }
 
-.timer-icon {
-    font-size: 2.8rem;
-    animation: iconFloat 3s ease-in-out infinite;
-    filter: drop-shadow(0 0 10px rgba(255, 182, 193, 0.3));
+/* 图标样式 */
+.btn-icon {
+    font-size: 3rem;
+    transition: all 0.4s ease;
 }
 
-.timer-header p {
-    font-size: 1.4rem;
-    color: rgba(255, 255, 255, 0.9);
-    letter-spacing: 2px;
-}
-
-/* 天数显示样式 */
-.days-counter {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.8rem;
-    padding: 1.5rem;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    width: 90%;
-    max-width: 260px;
-    position: relative;
-    overflow: hidden;
-}
-
-.days-counter::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        135deg,
-        transparent,
-        rgba(255, 182, 193, 0.05),
-        transparent
-    );
-    animation: dayGlow 3s ease-in-out infinite alternate;
-}
-
-.days-number {
-    font-size: clamp(2.5rem, 8vw, 3.5rem);
-    font-weight: 600;
-    color: transparent;
-    background: linear-gradient(135deg,
-        rgba(255, 182, 193, 0.95),
-        rgba(255, 255, 255, 0.9)
-    );
-    -webkit-background-clip: text;
-    background-clip: text;
-    font-variant-numeric: tabular-nums;
-    letter-spacing: 2px;
-    position: relative;
-}
-
-.days-label {
-    font-size: clamp(1rem, 3vw, 1.2rem);
-    color: rgba(255, 255, 255, 0.7);
-    letter-spacing: 4px;
-}
-
-/* 时分秒网格布局 */
-.time-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: clamp(0.5rem, 2vw, 1.2rem);
-    width: 90%;
-    max-width: 450px;
-    margin-top: 0.5rem;
-}
-
-/* 时分秒项样式 */
-.time-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    padding: clamp(0.8rem, 2vw, 1.2rem);
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: all 0.3s ease;
-}
-
-.time-item:hover {
-    transform: translateY(-3px);
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 182, 193, 0.15);
-}
-
-.time-number {
-    font-size: clamp(1.5rem, 4vw, 2rem);
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.9);
-    min-width: 2.5ch;
-    text-align: center;
-    font-variant-numeric: tabular-nums;
-    font-feature-settings: "tnum";
-}
-
-.time-label {
-    font-size: clamp(0.8rem, 2vw, 0.9rem);
-    color: rgba(255, 255, 255, 0.6);
-    letter-spacing: 2px;
-}
-
-/* 底部样式 */
-.timer-footer {
-    text-align: center;
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    width: 90%;
-}
-
-.timer-footer p:first-child {
-    font-size: clamp(0.9rem, 2.5vw, 1rem);
-    color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 0.8rem;
-    letter-spacing: 1px;
-}
-
-.timer-quote {
-    font-size: clamp(1rem, 3vw, 1.2rem);
-    color: rgba(255, 182, 193, 0.9);
-    line-height: 1.6;
-    letter-spacing: 1px;
-    position: relative;
-    padding: 0 1rem;
-}
-
-/* 装饰动画 */
-@keyframes dayGlow {
-    0% {
-        opacity: 0.3;
-        transform: scale(1);
-    }
-    100% {
-        opacity: 0.6;
-        transform: scale(1.05);
-    }
-}
-
-@keyframes iconFloat {
-    0%, 100% {
-        transform: translateY(0) scale(1);
-    }
-    50% {
-        transform: translateY(-10px) scale(1.05);
-    }
-}
-
-/* 响应式调整 */
-@media (max-width: 768px) {
-    .timer-container {
-        gap: 1.5rem;
-        padding: 1.5rem 1rem;
-    }
-    
-    .timer-header p {
-        font-size: clamp(1.1rem, 3vw, 1.4rem);
-    }
-    
-    .timer-icon {
-        font-size: clamp(2rem, 6vw, 2.8rem);
-    }
-}
-
-@media (max-width: 480px) {
-    .dialog-overlay.love-theme .dialog-content {
-        width: 95%;
-    }
-    
-    .time-grid {
-        width: 95%;
-    }
-    
-    .timer-container {
-        padding: 1rem;
-        gap: 1rem;
-    }
-    
-    .days-counter {
-        padding: 1.5rem;
-    }
-}
-
-/* 确保弹窗标题栏样式 */
-.dialog-overlay.love-theme .dialog-header {
-    padding: 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(255, 255, 255, 0.02);
-}
-
-.dialog-overlay.love-theme .dialog-header h3 {
-    font-size: clamp(1.1rem, 3vw, 1.3rem);
-    color: rgba(255, 255, 255, 0.9);
-    font-weight: 500;
-}
-
-/* 计时器弹窗样式 */
-.dialog-overlay.love-theme .dialog-content {
-    max-width: 600px;
-    width: 90%;
-    max-height: 90vh;
-    overflow: hidden;
-    padding: 0;
-}
-
-.dialog-overlay.love-theme .dialog-body {
-    overflow-y: auto;
-    max-height: calc(90vh - 60px); /* 减去标题栏高度 */
-    padding: 0;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(255, 182, 193, 0.3) transparent;
-}
-
-/* 自定义滚动条样式 */
-.dialog-overlay.love-theme .dialog-body::-webkit-scrollbar {
-    width: 6px;
-}
-
-.dialog-overlay.love-theme .dialog-body::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.dialog-overlay.love-theme .dialog-body::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 182, 193, 0.3);
-    border-radius: 3px;
-}
-
-/* 计时器弹窗整体样式 */
-.dialog-overlay.love-theme {
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(10px);
-}
-
-.dialog-overlay.love-theme .dialog-content {
-    max-width: 500px;
-    width: 90%;
-    max-height: 85vh;
-    background: linear-gradient(
-        135deg,
-        rgba(25, 25, 35, 0.95),
-        rgba(35, 35, 45, 0.95)
-    );
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 24px;
-    overflow: hidden;
-    box-shadow: 
-        0 0 40px rgba(0, 0, 0, 0.3),
-        0 0 80px rgba(255, 182, 193, 0.1);
-}
-
-/* 弹窗标题栏样式 */
-.dialog-overlay.love-theme .dialog-header {
-    padding: 1.2rem 1.5rem;
-    background: rgba(255, 255, 255, 0.03);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
-}
-
-.dialog-overlay.love-theme .dialog-header::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 182, 193, 0.3),
-        transparent
-    );
-}
-
-.dialog-overlay.love-theme .dialog-header h3 {
+/* 按钮文字 */
+.btn-content span:last-child {
     font-size: 1.2rem;
-    color: rgba(255, 255, 255, 0.95);
-    font-weight: 500;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.9);
 }
 
-/* 弹窗内容区域 */
-.dialog-overlay.love-theme .dialog-body {
-    padding: 1.5rem;
-    overflow-y: auto;
-    max-height: calc(85vh - 60px);
-    scrollbar-width: thin;
-    scrollbar-color: rgba(255, 182, 193, 0.3) transparent;
-}
-
-/* 计时器容器样式优化 */
-.timer-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2.5rem;
-    padding: 1rem;
-    position: relative;
-}
-
-/* 天数显示卡片样式优化 */
-.days-counter {
-    width: 100%;
-    max-width: 280px;
-    padding: 2rem;
-    background: rgba(255, 255, 255, 0.04);
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.days-counter:hover {
-    transform: translateY(-3px);
-    box-shadow: 
-        0 10px 30px rgba(0, 0, 0, 0.2),
-        0 0 20px rgba(255, 182, 193, 0.1);
-}
-
-.days-counter::before {
-    content: '';
-    position: absolute;
-    inset: 0;
+/* 情话按钮样式 */
+.glass-btn:nth-child(1) {
     background: linear-gradient(
         135deg,
-        transparent,
-        rgba(255, 182, 193, 0.05),
-        transparent
+        rgba(255, 182, 193, 0.1),
+        rgba(255, 255, 255, 0.02)
     );
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.days-counter:hover::before {
-    opacity: 1;
-}
-
-/* 时分秒网格样式优化 */
-.time-grid {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    padding: 0.5rem;
-}
-
-.time-item {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 16px;
-    padding: 1.2rem 1rem;
-    transition: all 0.3s ease;
-}
-
-.time-item:hover {
-    background: rgba(255, 255, 255, 0.05);
     border-color: rgba(255, 182, 193, 0.2);
-    transform: translateY(-2px);
 }
 
-/* 底部样式优化 */
-.timer-footer {
-    width: 100%;
-    text-align: center;
-    padding: 1.5rem 1rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    position: relative;
-}
-
-.timer-footer::before {
-    content: '';
-    position: absolute;
-    top: 1px;
-    left: 0;
-    width: 100%;
-    height: 1px;
+/* 百科按钮样式 */
+.glass-btn:nth-child(2) {
     background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 182, 193, 0.2),
-        transparent
+        135deg,
+        rgba(173, 216, 230, 0.1),
+        rgba(255, 255, 255, 0.02)
     );
+    border-color: rgba(173, 216, 230, 0.2);
 }
 
-.timer-quote {
-    position: relative;
-    display: inline-block;
-    padding: 0.5rem 1.5rem;
-    color: rgba(255, 182, 193, 0.9);
-    font-size: 1.1rem;
-    line-height: 1.6;
-    letter-spacing: 1px;
-}
-
-.timer-quote::before,
-.timer-quote::after {
-    content: '"';
-    position: absolute;
-    font-size: 1.5rem;
-    color: rgba(255, 182, 193, 0.5);
-}
-
-.timer-quote::before {
-    left: 0;
-    top: 0;
-}
-
-.timer-quote::after {
-    right: 0;
-    bottom: 0;
-}
-
-/* 自定义滚动条样式 */
-.dialog-overlay.love-theme .dialog-body::-webkit-scrollbar {
-    width: 4px;
-}
-
-.dialog-overlay.love-theme .dialog-body::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.dialog-overlay.love-theme .dialog-body::-webkit-scrollbar-thumb {
-    background: rgba(255, 182, 193, 0.2);
-    border-radius: 2px;
-}
-
-.dialog-overlay.love-theme .dialog-body::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 182, 193, 0.3);
-}
-
-/* 动画效果优化 */
-@keyframes fadeScale {
-    from {
-        opacity: 0;
-        transform: scale(0.95);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-.dialog-overlay.love-theme .dialog-content {
-    animation: fadeScale 0.3s ease forwards;
-}
-
-/* 响应式优化 */
-@media (max-width: 480px) {
-    .dialog-overlay.love-theme .dialog-content {
-        width: 95%;
-        max-height: 90vh;
-    }
-    
-    .timer-container {
-        gap: 2rem;
-    }
-    
-    .days-counter {
-        padding: 1.5rem;
-    }
-    
-    .time-grid {
-        gap: 0.8rem;
-    }
-    
-    .time-item {
-        padding: 1rem 0.8rem;
-    }
-    
-    .timer-quote {
-        font-size: 1rem;
-        padding: 0.5rem 1rem;
-    }
-}
-
-/* 计时器分屏布局 */
-.timer-split-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    min-height: 400px;
-}
-
-/* 左侧计时器面板 */
-.timer-panel {
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-    position: relative;
-    overflow: hidden;
-}
-
-.timer-panel::before {
+/* 按钮光效 */
+.glass-btn::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-        135deg,
-        transparent,
-        rgba(255, 182, 193, 0.03),
-        transparent
+    background: radial-gradient(
+        circle at 30% 30%,
+        rgba(255, 255, 255, 0.1),
+        transparent 70%
     );
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.4s ease;
 }
 
-.timer-panel:hover::before {
+/* 悬浮效果 */
+.glass-btn:hover {
+    transform: translateY(-5px);
+}
+
+.glass-btn:hover::before {
     opacity: 1;
 }
 
-/* 右侧文案面板 */
-.message-panel {
-    background: rgba(255, 255, 255, 0.02);
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
-
-.message-header {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    position: relative;
-}
-
-.message-header::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 1px;
+/* 情话按钮悬浮效果 */
+.glass-btn:nth-child(1):hover {
     background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 182, 193, 0.2),
-        transparent
+        135deg,
+        rgba(255, 182, 193, 0.15),
+        rgba(255, 255, 255, 0.03)
     );
+    border-color: rgba(255, 182, 193, 0.3);
+    box-shadow: 
+        0 15px 40px rgba(255, 182, 193, 0.15),
+        0 5px 15px rgba(255, 182, 193, 0.1);
 }
 
-.message-icon {
-    font-size: 2rem;
-    animation: messageFloat 3s ease-in-out infinite;
+/* 百科按钮悬浮效果 */
+.glass-btn:nth-child(2):hover {
+    background: linear-gradient(
+        135deg,
+        rgba(173, 216, 230, 0.15),
+        rgba(255, 255, 255, 0.03)
+    );
+    border-color: rgba(173, 216, 230, 0.3);
+    box-shadow: 
+        0 15px 40px rgba(173, 216, 230, 0.15),
+        0 5px 15px rgba(173, 216, 230, 0.1);
 }
 
-.message-header h3 {
-    font-size: 1.3rem;
-    color: rgba(255, 255, 255, 0.9);
-    font-weight: 500;
-    letter-spacing: 1px;
+/* 图标悬浮效果 */
+.glass-btn:hover .btn-icon {
+    transform: translateY(-5px);
 }
 
-.message-content {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    padding: 1rem;
-}
-
-.start-date {
-    text-align: center;
-    padding: 1.5rem;
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.date-label {
-    display: block;
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.6);
-    margin-bottom: 0.5rem;
-    letter-spacing: 2px;
-}
-
-.date {
-    font-size: 1.2rem;
-    color: rgba(255, 255, 255, 0.9);
-    letter-spacing: 1px;
-}
-
-.love-quote {
-    text-align: center;
-    padding: 2rem;
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 16px;
-    position: relative;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.love-quote p {
-    color: rgba(255, 182, 193, 0.9);
-    line-height: 1.8;
-    font-size: 1.1rem;
-    letter-spacing: 1px;
-}
-
-.love-quote::before,
-.love-quote::after {
-    content: '"';
-    position: absolute;
-    font-size: 2rem;
-    color: rgba(255, 182, 193, 0.3);
-}
-
-.love-quote::before {
-    left: 1rem;
-    top: 1rem;
-}
-
-.love-quote::after {
-    right: 1rem;
-    bottom: 1rem;
-}
-
-/* 动画效果 */
-@keyframes messageFloat {
-    0%, 100% {
-        transform: translateY(0) rotate(0deg);
-    }
-    50% {
-        transform: translateY(-5px) rotate(5deg);
-    }
+/* 点击效果 */
+.glass-btn:active {
+    transform: translateY(-2px) scale(0.98);
+    transition: transform 0.1s ease;
 }
 
 /* 响应式调整 */
 @media (max-width: 768px) {
-    .timer-split-layout {
-        grid-template-columns: 1fr;
-        gap: 1rem;
+    .button-container {
+        padding: 1rem;
+        gap: 1.5rem;
     }
-    
-    .timer-panel,
-    .message-panel {
-        padding: 1.5rem;
-    }
-    
-    .love-quote {
-        padding: 1.5rem;
-    }
-    
-    .love-quote p {
-        font-size: 1rem;
-    }
-}
 
-/* 优化弹窗尺寸 */
-.dialog-overlay.love-theme .dialog-content {
-    max-width: 900px;
-    width: 90%;
-}
-
-.dialog-overlay.love-theme .dialog-body {
-    padding: 1.5rem;
+    .glass-btn {
+        padding: 2rem;
+    }
+    
+    .btn-icon {
+        font-size: 2.5rem;
+    }
+    
+    .btn-content span:last-child {
+        font-size: 1.1rem;
+    }
 }
