@@ -368,9 +368,8 @@ function displayFoodResults(results) {
                 <span class="calory">${food.calory || '0'} 千卡/100g</span>
             </div>
             <div class="food-item-nutrients">
-                <span class="nutrient">蛋白质: ${food.protein || '0'}g</span>
-                <span class="nutrient">脂肪: ${food.fat || '0'}g</span>
-                <span class="nutrient">碳水: ${food.carbohydrate || '0'}g</span>
+                <!-- 健康等级 健康等级 1 2 3 分别是推荐 适量 少 -->
+                <span class="nutrient">健康等级: ${food.healthLevel || '0'}</span>
             </div>
             <div class="food-item-footer">
                 <span class="view-detail">点击查看详情 →</span>
@@ -409,24 +408,14 @@ function closeInfoDialog(btn) {
     setTimeout(() => dialog.remove(), 300);
 }
 
-// 修改食物详情函数
+// 修改食物详情函数，添加触摸支持和响应式布局
 async function showFoodDetail(foodId) {
-    // 先创建弹窗，显示加载动画
     showInfoDialog({
         title: '食物详情',
         content: `
             <div class="detail-loading-container">
-                <div class="detail-loading-spinner">
-                    <div class="spinner-ring"></div>
-                    <div class="spinner-ring"></div>
-                    <div class="spinner-ring"></div>
-                </div>
-                <div class="detail-loading-text">
-                    <span>正在获取详情</span>
-                    <div class="loading-dots">
-                        <span>.</span><span>.</span><span>.</span>
-                    </div>
-                </div>
+                <div class="loading-spinner"></div>
+                <div class="loading-text">获取详情中...</div>
             </div>
         `,
         theme: 'wiki'
@@ -438,74 +427,21 @@ async function showFoodDetail(foodId) {
         
         const response = await fetch(corsProxy + encodeURIComponent(apiUrl));
         const data = await response.json();
-        
+        console.log(data);
         if (data.code === 1) {
             const food = data.data;
-            // 更新弹窗内容
             const dialog = document.querySelector('.info-dialog-content');
             if (dialog) {
                 dialog.innerHTML = `
-                    <div class="food-detail-container">
-                        <div class="food-header">
-                            <span class="food-icon">🍽️</span>
-                            <div class="food-calory-big">
-                                <span class="number">${food.calory || '0'}</span>
-                                <span class="unit">千卡/100g</span>
-                            </div>
-                        </div>
-                        
-                        <div class="nutrition-grid">
-                            <div class="nutrition-item">
-                                <div class="nutrition-icon">🥩</div>
-                                <div class="nutrition-data">
-                                    <span class="value">${food.protein || '0'}<small>g</small></span>
-                                    <span class="label">蛋白质</span>
-                                </div>
-                            </div>
-                            <div class="nutrition-item">
-                                <div class="nutrition-icon">🥑</div>
-                                <div class="nutrition-data">
-                                    <span class="value">${food.fat || '0'}<small>g</small></span>
-                                    <span class="label">脂肪</span>
-                                </div>
-                            </div>
-                            <div class="nutrition-item">
-                                <div class="nutrition-icon">🍚</div>
-                                <div class="nutrition-data">
-                                    <span class="value">${food.carbohydrate || '0'}<small>g</small></span>
-                                    <span class="label">碳水化合物</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="details-grid">
-                            <div class="detail-item">
-                                <div class="detail-header">
-                                    <span class="detail-icon">🥗</span>
-                                    <h4>膳食纤维</h4>
-                                </div>
-                                <p>${food.fiber || '暂无数据'} g</p>
-                            </div>
-                            <div class="detail-item">
-                                <div class="detail-header">
-                                    <span class="detail-icon">🥕</span>
-                                    <h4>维生素A</h4>
-                                </div>
-                                <p>${food.vitaminA || '暂无数据'}</p>
-                            </div>
-                        </div>
-
-                        ${food.description ? `
-                            <div class="food-description">
-                                <div class="description-header">
-                                    <span class="description-icon">📝</span>
-                                    <h4>食物简介</h4>
-                                </div>
-                                <p>${food.description}</p>
-                            </div>
-                        ` : ''}
+                    <div class="food-detail-content" id="foodDetailContent">
+                        <!-- 内容模板保持不变 -->
+                        ${createFoodDetailContent(food)}
                     </div>
                 `;
+
+                initTouchInteractions();
+                initKeyboardNavigation();
+                initScrollOptimization();
             }
         } else {
             throw new Error(data.msg || '获取失败');
@@ -514,11 +450,10 @@ async function showFoodDetail(foodId) {
         const dialog = document.querySelector('.info-dialog-content');
         if (dialog) {
             dialog.innerHTML = `
-                <div class="detail-error-container">
+                <div class="error-container">
                     <div class="error-icon">❌</div>
                     <div class="error-message">获取详情失败</div>
-                    <div class="error-detail">${error.message}</div>
-                    <button class="retry-btn" onclick="showFoodDetail('${foodId}')">重试</button>
+                    <button class="retry-button" onclick="showFoodDetail('${foodId}')">重试</button>
                 </div>
             `;
         }
@@ -527,12 +462,201 @@ async function showFoodDetail(foodId) {
     }
 }
 
+// 创建食物详情内容模板
+function createFoodDetailContent(food) {
+    return `
+        <!-- 基本信息区域 -->
+        <div class="food-header">
+            <div class="food-info">
+                <h2 class="food-title">${food.name}</h2>
+                <div class="food-meta">
+                    <span class="health-tag">${getHealthTag(food.healthLight)}</span>
+                    <span class="health-tips">${food.healthTips || ''}</span>
+                </div>
+            </div>
+            <div class="calory-display">
+                <div class="energy-info">
+                    <div class="calory-value">${food.calory || '0'}</div>
+                    <div class="calory-unit">${food.caloryUnit || '千卡/100g'}</div>
+                </div>
+                <div class="joule-info">
+                    <div class="joule-value">${food.joule || '0'}</div>
+                    <div class="joule-unit">${food.jouleUnit || '千焦/100g'}</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 主要营养成分 -->
+        <div class="main-nutrition">
+            <div class="nutrition-card">
+                <div class="nutrition-value">${food.protein || '0'}</div>
+                <div class="nutrition-name">蛋白质</div>
+                <div class="nutrition-unit">${food.proteinUnit || 'g/100g'}</div>
+            </div>
+            <div class="nutrition-card">
+                <div class="nutrition-value">${food.fat || '0'}</div>
+                <div class="nutrition-name">脂肪</div>
+                <div class="nutrition-unit">${food.fatUnit || 'g/100g'}</div>
+            </div>
+            <div class="nutrition-card">
+                <div class="nutrition-value">${food.carbohydrate || '0'}</div>
+                <div class="nutrition-name">碳水化合物</div>
+                <div class="nutrition-unit">${food.carbohydrateUnit || 'g/100g'}</div>
+            </div>
+            <div class="nutrition-card">
+                <div class="nutrition-value">${food.fiberDietary || '0'}</div>
+                <div class="nutrition-name">膳食纤维</div>
+                <div class="nutrition-unit">${food.fiberDietaryUnit || 'g/100g'}</div>
+            </div>
+        </div>
+
+        <!-- 脂肪详情 -->
+        <div class="fat-details">
+            <h3 class="section-title">脂肪详情</h3>
+            <div class="fat-grid">
+                ${createFatDetails(food)}
+            </div>
+        </div>
+
+        <!-- 维生素详情 -->
+        <div class="vitamin-details">
+            <h3 class="section-title">维生素含量</h3>
+            <div class="vitamin-grid">
+                ${createVitaminDetails(food)}
+            </div>
+        </div>
+
+        <!-- 矿物质详情 -->
+        <div class="mineral-details">
+            <h3 class="section-title">矿物质含量</h3>
+            <div class="mineral-grid">
+                ${createMineralDetails(food)}
+            </div>
+        </div>
+
+        <!-- 血糖指数信息 -->
+        ${food.glycemicInfoData ? `
+            <div class="glycemic-info">
+                <h3 class="section-title">血糖生成指数</h3>
+                <div class="glycemic-grid">
+                    <div class="glycemic-item">
+                        <div class="glycemic-header">GI值</div>
+                        <div class="glycemic-value">${food.glycemicInfoData.gi.value || '0'}</div>
+                        <div class="glycemic-label">${food.glycemicInfoData.gi.label || '-'}</div>
+                    </div>
+                    <div class="glycemic-item">
+                        <div class="glycemic-header">GL值</div>
+                        <div class="glycemic-value">${food.glycemicInfoData.gl.value || '0'}</div>
+                        <div class="glycemic-label">${food.glycemicInfoData.gl.label || '-'}</div>
+                    </div>
+                </div>
+            </div>
+        ` : ''}
+
+        <!-- 健康建议 -->
+        ${food.healthSuggest ? `
+            <div class="health-advice">
+                <h3 class="section-title">健康建议</h3>
+                <div class="advice-content">${food.healthSuggest}</div>
+            </div>
+        ` : ''}
+    `;
+}
+
+// 辅助函数：获取健康标签文本
+function getHealthTag(healthLight) {
+    switch (healthLight) {
+        case 1:
+            return '推荐食用';
+        case 2:
+            return '适量食用';
+        case 3:
+            return '少量食用';
+        default:
+            return '暂无建议';
+    }
+}
+
+// 创建脂肪详情展示
+function createFatDetails(food) {
+    const fatTypes = [
+        { label: '饱和脂肪', value: food.saturatedFat, unit: food.saturatedFatUnit },
+        { label: '反式脂肪', value: food.fattyAcid, unit: food.fattyAcidUnit },
+        { label: '单不饱和脂肪', value: food.mufa, unit: food.mufaUnit },
+        { label: '多不饱和脂肪', value: food.pufa, unit: food.pufaUnit },
+        { label: '胆固醇', value: food.cholesterol, unit: food.cholesterolUnit }
+    ];
+
+    return fatTypes.map(fat => {
+        if (!fat.value || fat.value === '0') return '';
+        return `
+            <div class="detail-item">
+                <div class="detail-label">${fat.label}</div>
+                <div class="detail-value">${fat.value}${fat.unit || ''}</div>
+            </div>
+        `;
+    }).join('');
+}
+
+// 创建维生素详情展示
+function createVitaminDetails(food) {
+    const vitamins = [
+        { label: '维生素A', value: food.vitaminA, unit: food.vitaminAUnit },
+        { label: '维生素C', value: food.vitaminC, unit: food.vitaminCUnit },
+        { label: '维生素D', value: food.vitaminD, unit: food.vitaminDUnit },
+        { label: '维生素E', value: food.vitaminE, unit: food.vitaminEUnit },
+        { label: '维生素K', value: food.vitaminK, unit: food.vitaminKUnit },
+        { label: '维生素B1', value: food.thiamine, unit: food.thiamineUnit },
+        { label: '维生素B2', value: food.lactoflavin, unit: food.lactoflavinUnit },
+        { label: '维生素B6', value: food.vitaminB6, unit: food.vitaminB6Unit },
+        { label: '维生素B12', value: food.vitaminB12, unit: food.vitaminB12Unit },
+        { label: '烟酸', value: food.niacin, unit: food.niacinUnit },
+        { label: '叶酸', value: food.folacin, unit: food.folacinUnit }
+    ];
+
+    return vitamins.map(vitamin => {
+        if (!vitamin.value || vitamin.value === '0') return '';
+        return `
+            <div class="detail-item">
+                <div class="detail-label">${vitamin.label}</div>
+                <div class="detail-value">${vitamin.value}${vitamin.unit || ''}</div>
+            </div>
+        `;
+    }).join('');
+}
+
+// 创建矿物质详情展示
+function createMineralDetails(food) {
+    const minerals = [
+        { label: '钙', value: food.calcium, unit: food.calciumUnit },
+        { label: '铁', value: food.iron, unit: food.ironUnit },
+        { label: '锌', value: food.zinc, unit: food.zincUnit },
+        { label: '磷', value: food.phosphor, unit: food.phosphorUnit },
+        { label: '钾', value: food.kalium, unit: food.kaliumUnit },
+        { label: '镁', value: food.magnesium, unit: food.magnesiumUnit },
+        { label: '硒', value: food.selenium, unit: food.seleniumUnit },
+        { label: '铜', value: food.copper, unit: food.copperUnit },
+        { label: '锰', value: food.manganese, unit: food.manganeseUnit },
+        { label: '碘', value: food.iodine, unit: food.iodineUnit }
+    ];
+
+    return minerals.map(mineral => {
+        if (!mineral.value || mineral.value === '0') return '';
+        return `
+            <div class="detail-item">
+                <div class="detail-label">${mineral.label}</div>
+                <div class="detail-value">${mineral.value}${mineral.unit || ''}</div>
+            </div>
+        `;
+    }).join('');
+}
+
 // 添加 Logo 点击/悬浮事件
 document.addEventListener('DOMContentLoaded', () => {
     const logo = document.querySelector('.logo-container');
     let timer;
 
-    // ��浮显示计时器
+    // 悬浮显示计时器
     logo.addEventListener('mouseenter', () => {
         timer = setTimeout(() => {
             const content = getLoveTimerContent();
@@ -697,7 +821,7 @@ function initLoveWordsEffect() {
 
 // 添加敬请期待提示函数
 function showComingSoon() {
-    showNotification('病症搜索功能敬请期待 (✧∀✧)', 3000, 'info');
+    showNotification('病症搜索功能敬请期待 (��∀✧)', 3000, 'info');
 }
 
 // 创建再来一句按钮
@@ -730,5 +854,83 @@ function createRefreshButton() {
     });
 
     return button;
+}
+
+// 初始化触摸交互
+function initTouchInteractions() {
+    const content = document.getElementById('foodDetailContent');
+    if (!content) return;
+
+    // 添加触摸反馈
+    const touchElements = content.querySelectorAll('.nutrition-card, .glycemic-item, .nutrition-group, .food-description');
+    touchElements.forEach(element => {
+        element.addEventListener('touchstart', function() {
+            this.style.transform = 'scale(0.98)';
+        }, { passive: true });
+
+        element.addEventListener('touchend', function() {
+            this.style.transform = '';
+        }, { passive: true });
+    });
+
+    // 支持触摸滑动
+    let startY = 0;
+    content.addEventListener('touchstart', function(e) {
+        startY = e.touches[0].pageY;
+    }, { passive: true });
+
+    content.addEventListener('touchmove', function(e) {
+        const deltaY = e.touches[0].pageY - startY;
+        if (Math.abs(deltaY) > 5) {
+            // 允许自然滚动
+            e.stopPropagation();
+        }
+    }, { passive: true });
+}
+
+// 初始化键盘导航
+function initKeyboardNavigation() {
+    const focusableElements = document.querySelectorAll('[tabindex="0"]');
+    focusableElements.forEach(element => {
+        element.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                element.click();
+            }
+        });
+    });
+}
+
+// 初始化滚动优化
+function initScrollOptimization() {
+    const content = document.getElementById('foodDetailContent');
+    if (!content) return;
+
+    // 使用 Intersection Observer 优化滚动性能
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, {
+        root: content,
+        threshold: 0.1
+    });
+
+    // 观察所有可滚动内容
+    const elements = content.querySelectorAll('.nutrition-card, .glycemic-item, .nutrition-group, .food-description');
+    elements.forEach(element => observer.observe(element));
+
+    // 优化滚动性能
+    let scrollTimeout;
+    content.addEventListener('scroll', () => {
+        if (!content.classList.contains('scrolling')) {
+            content.classList.add('scrolling');
+        }
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            content.classList.remove('scrolling');
+        }, 150);
+    }, { passive: true });
 }
 

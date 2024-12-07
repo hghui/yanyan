@@ -16,9 +16,8 @@
     font-size: 3.5rem;
     font-weight: bold;
     background: linear-gradient(135deg,
-        rgba(255, 182, 193, 0.95) 0%,
-        rgba(255, 255, 255, 0.9) 100%
-    );
+            rgba(255, 182, 193, 0.95) 0%,
+            rgba(255, 255, 255, 0.9) 100%);
     -webkit-background-clip: text;
     -moz-background-clip: text;
     -ms-background-clip: text;
@@ -73,10 +72,13 @@
 
 /* 心跳动画 */
 @keyframes heartPulse {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: scale(1);
         opacity: 0.9;
     }
+
     50% {
         transform: scale(1.1);
         opacity: 1;
@@ -122,7 +124,7 @@
     transform: translateX(120%) scale(0.9);
     opacity: 0;
     transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
-                opacity 0.3s ease;
+        opacity 0.3s ease;
     animation: notificationSlide 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
@@ -135,8 +137,8 @@
 .notification.default {
     border-left: 4px solid rgba(173, 216, 230, 0.7);
     background: linear-gradient(90deg,
-        rgba(173, 216, 230, 0.1) 0%,
-        rgba(255, 255, 255, 0.1) 100%);
+            rgba(173, 216, 230, 0.1) 0%,
+            rgba(255, 255, 255, 0.1) 100%);
     animation: defaultGlow 3s infinite alternate;
 }
 
@@ -144,8 +146,8 @@
 .notification.success {
     border-left: 4px solid rgba(255, 182, 193, 0.7);
     background: linear-gradient(90deg,
-        rgba(255, 182, 193, 0.1) 0%,
-        rgba(255, 255, 255, 0.1) 100%);
+            rgba(255, 182, 193, 0.1) 0%,
+            rgba(255, 255, 255, 0.1) 100%);
     animation: successGlow 3s infinite alternate;
 }
 
@@ -153,8 +155,8 @@
 .notification.error {
     border-left: 4px solid rgba(255, 99, 99, 0.7);
     background: linear-gradient(90deg,
-        rgba(255, 99, 99, 0.1) 0%,
-        rgba(255, 255, 255, 0.1) 100%);
+            rgba(255, 99, 99, 0.1) 0%,
+            rgba(255, 255, 255, 0.1) 100%);
     animation: errorGlow 3s infinite alternate;
 }
 
@@ -162,8 +164,8 @@
 .notification.info {
     border-left: 4px solid rgba(173, 216, 230, 0.7);
     background: linear-gradient(90deg,
-        rgba(173, 216, 230, 0.1) 0%,
-        rgba(255, 182, 193, 0.1) 100%);
+            rgba(173, 216, 230, 0.1) 0%,
+            rgba(255, 182, 193, 0.1) 100%);
     animation: infoGlow 3s infinite alternate;
 }
 
@@ -171,48 +173,53 @@
 @keyframes defaultGlow {
     0% {
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3),
-                    0 0 32px rgba(173, 216, 230, 0.1);
+            0 0 32px rgba(173, 216, 230, 0.1);
     }
+
     100% {
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3),
-                    0 0 32px rgba(173, 216, 230, 0.3);
+            0 0 32px rgba(173, 216, 230, 0.3);
     }
 }
 
 @keyframes successGlow {
     0% {
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3),
-                    0 0 32px rgba(255, 182, 193, 0.1);
+            0 0 32px rgba(255, 182, 193, 0.1);
     }
+
     100% {
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3),
-                    0 0 32px rgba(255, 182, 193, 0.3);
+            0 0 32px rgba(255, 182, 193, 0.3);
     }
 }
 
 @keyframes errorGlow {
     0% {
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3),
-                    0 0 32px rgba(255, 99, 99, 0.1);
+            0 0 32px rgba(255, 99, 99, 0.1);
     }
+
     100% {
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3),
-                    0 0 32px rgba(255, 99, 99, 0.3);
+            0 0 32px rgba(255, 99, 99, 0.3);
     }
 }
 
 @keyframes infoGlow {
     0% {
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3),
-                    0 0 32px rgba(173, 216, 230, 0.1);
+            0 0 32px rgba(173, 216, 230, 0.1);
     }
+
     50% {
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3),
-                    0 0 32px rgba(255, 182, 193, 0.2);
+            0 0 32px rgba(255, 182, 193, 0.2);
     }
+
     100% {
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3),
-                    0 0 32px rgba(173, 216, 230, 0.3);
+            0 0 32px rgba(173, 216, 230, 0.3);
     }
 }
 
@@ -221,6 +228,7 @@
         transform: translateX(120%) scale(0.9);
         opacity: 0;
     }
+
     to {
         transform: translateX(0) scale(1);
         opacity: 1;
@@ -257,8 +265,8 @@
     opacity: 0;
     transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
-                inset 0 0 0 1px rgba(255, 255, 255, 0.1),
-                inset 0 0 32px rgba(255, 182, 193, 0.05);
+        inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+        inset 0 0 32px rgba(255, 182, 193, 0.05);
 }
 
 .dialog-content h3 {
@@ -293,7 +301,7 @@
 .dialog-buttons .glass-btn:hover {
     background: rgba(255, 255, 255, 0.15);
     box-shadow: 0 5px 15px rgba(255, 182, 193, 0.2),
-                0 0 20px rgba(173, 216, 230, 0.2);
+        0 0 20px rgba(173, 216, 230, 0.2);
     transform: translateY(-3px) scale(1.02);
 }
 
@@ -316,13 +324,14 @@
 @keyframes dialogGlow {
     0% {
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
-                    inset 0 0 0 1px rgba(255, 255, 255, 0.1),
-                    inset 0 0 32px rgba(255, 182, 193, 0.05);
+            inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+            inset 0 0 32px rgba(255, 182, 193, 0.05);
     }
+
     100% {
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
-                    inset 0 0 0 1px rgba(255, 255, 255, 0.1),
-                    inset 0 0 32px rgba(173, 216, 230, 0.1);
+            inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+            inset 0 0 32px rgba(173, 216, 230, 0.1);
     }
 }
 
@@ -330,6 +339,7 @@
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
@@ -360,11 +370,12 @@
 @keyframes notification-glow {
     0% {
         box-shadow: 0 0 5px rgba(255, 182, 193, 0.5),
-                    0 0 10px rgba(173, 216, 230, 0.5);
+            0 0 10px rgba(173, 216, 230, 0.5);
     }
+
     100% {
         box-shadow: 0 0 20px rgba(255, 182, 193, 0.8),
-                    0 0 30px rgba(173, 216, 230, 0.8);
+            0 0 30px rgba(173, 216, 230, 0.8);
     }
 }
 
@@ -414,11 +425,10 @@
     padding: 2rem;
     border-radius: 20px;
     background: linear-gradient(135deg,
-        rgba(255, 182, 193, 0.08) 0%,
-        rgba(255, 255, 255, 0.03) 100%
-    );
+            rgba(255, 182, 193, 0.08) 0%,
+            rgba(255, 255, 255, 0.03) 100%);
     border: 1px solid rgba(255, 182, 193, 0.15);
-    box-shadow: 
+    box-shadow:
         0 20px 50px rgba(0, 0, 0, 0.3),
         inset 0 0 0 1px rgba(255, 182, 193, 0.1),
         inset 0 0 30px rgba(255, 182, 193, 0.05);
@@ -449,19 +459,17 @@
     width: 100%;
     height: 1px;
     background: linear-gradient(90deg,
-        transparent,
-        rgba(255, 182, 193, 0.3),
-        transparent
-    );
+            transparent,
+            rgba(255, 182, 193, 0.3),
+            transparent);
 }
 
 .page-header h2 {
     margin: 0;
     font-size: 1.8rem;
     background: linear-gradient(135deg,
-        rgba(255, 182, 193, 0.95),
-        rgba(255, 255, 255, 0.8)
-    );
+            rgba(255, 182, 193, 0.95),
+            rgba(255, 255, 255, 0.8));
     -webkit-background-clip: text;
     -moz-background-clip: text;
     -ms-background-clip: text;
@@ -471,7 +479,7 @@
     -moz-text-fill-color: transparent;
     -ms-text-fill-color: transparent;
     -o-text-fill-color: transparent;
-    text-fill-color: transparent;
+    /* text-fill-color: transparent; */
     text-shadow: 0 0 15px rgba(255, 182, 193, 0.3);
 }
 
@@ -498,7 +506,7 @@
     transform: rotate(180deg) scale(1.1);
     border-color: rgba(255, 182, 193, 0.4);
     background: rgba(255, 182, 193, 0.1);
-    box-shadow: 
+    box-shadow:
         0 0 20px rgba(255, 182, 193, 0.2),
         inset 0 0 10px rgba(255, 182, 193, 0.1);
     color: rgba(255, 255, 255, 0.95);
@@ -515,11 +523,10 @@
 .decoration-line {
     flex: 1;
     height: 1px;
-    background: linear-gradient(to right, 
-        transparent,
-        rgba(255, 182, 193, 0.3),
-        transparent
-    );
+    background: linear-gradient(to right,
+            transparent,
+            rgba(255, 182, 193, 0.3),
+            transparent);
 }
 
 .decoration-icon {
@@ -527,7 +534,7 @@
     padding: 0.8rem;
     background: rgba(255, 182, 193, 0.05);
     border-radius: 50%;
-    box-shadow: 
+    box-shadow:
         0 0 20px rgba(255, 182, 193, 0.1),
         inset 0 0 10px rgba(255, 182, 193, 0.05);
     animation: iconFloat 3s ease-in-out infinite;
@@ -546,13 +553,14 @@
 /* 动画效果 */
 @keyframes contentGlow {
     0% {
-        box-shadow: 
+        box-shadow:
             0 20px 50px rgba(0, 0, 0, 0.3),
             inset 0 0 0 1px rgba(255, 182, 193, 0.1),
             inset 0 0 30px rgba(255, 182, 193, 0.05);
     }
+
     100% {
-        box-shadow: 
+        box-shadow:
             0 20px 50px rgba(0, 0, 0, 0.3),
             inset 0 0 0 1px rgba(255, 182, 193, 0.2),
             inset 0 0 50px rgba(255, 182, 193, 0.1);
@@ -560,8 +568,15 @@
 }
 
 @keyframes iconFloat {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
 }
 
 /* 滚动条美化 */
@@ -680,10 +695,9 @@
 .logo-icon {
     font-size: 3.5rem;
     font-weight: bold;
-    background: linear-gradient(135deg, 
-        rgba(255, 182, 193, 0.9),
-        rgba(173, 216, 230, 0.9)
-    );
+    background: linear-gradient(135deg,
+            rgba(255, 182, 193, 0.9),
+            rgba(173, 216, 230, 0.9));
     -webkit-background-clip: text;
     -moz-background-clip: text;
     -ms-background-clip: text;
@@ -698,9 +712,8 @@
     font-size: 2.5rem;
     font-weight: bold;
     background: linear-gradient(135deg,
-        rgba(255, 182, 193, 0.9),
-        rgba(255, 255, 255, 0.9)
-    );
+            rgba(255, 182, 193, 0.9),
+            rgba(255, 255, 255, 0.9));
     -webkit-background-clip: text;
     -moz-background-clip: text;
     -ms-background-clip: text;
@@ -753,11 +766,9 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-        135deg,
-        rgba(255, 255, 255, 0.1),
-        transparent
-    );
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.1),
+            transparent);
     opacity: 0;
     transition: opacity 0.3s ease;
 }
@@ -765,7 +776,7 @@
 .timer-item:hover {
     transform: translateY(-5px) scale(1.05);
     background: rgba(255, 182, 193, 0.08);
-    box-shadow: 
+    box-shadow:
         0 10px 30px rgba(255, 182, 193, 0.1),
         inset 0 0 20px rgba(255, 182, 193, 0.05);
 }
@@ -779,9 +790,8 @@
     font-weight: bold;
     font-family: 'Noto Sans SC', monospace;
     background: linear-gradient(135deg,
-        rgba(255, 182, 193, 0.9),
-        rgba(255, 255, 255, 0.9)
-    );
+            rgba(255, 182, 193, 0.9),
+            rgba(255, 255, 255, 0.9));
     -webkit-background-clip: text;
     -moz-background-clip: text;
     -ms-background-clip: text;
@@ -821,12 +831,10 @@
     left: 0;
     width: 100%;
     height: 1px;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 182, 193, 0.3),
-        transparent
-    );
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 182, 193, 0.3),
+            transparent);
 }
 
 .timer-footer p {
@@ -846,16 +854,35 @@
 
 /* 动画效果 */
 @keyframes heartbeat {
-    0% { transform: scale(1); }
-    14% { transform: scale(1.3); }
-    28% { transform: scale(1); }
-    42% { transform: scale(1.3); }
-    70% { transform: scale(1); }
+    0% {
+        transform: scale(1);
+    }
+
+    14% {
+        transform: scale(1.3);
+    }
+
+    28% {
+        transform: scale(1);
+    }
+
+    42% {
+        transform: scale(1.3);
+    }
+
+    70% {
+        transform: scale(1);
+    }
 }
 
 @keyframes quoteGlow {
-    from { text-shadow: 0 0 5px rgba(255, 182, 193, 0.5); }
-    to { text-shadow: 0 0 15px rgba(255, 182, 193, 0.8); }
+    from {
+        text-shadow: 0 0 5px rgba(255, 182, 193, 0.5);
+    }
+
+    to {
+        text-shadow: 0 0 15px rgba(255, 182, 193, 0.8);
+    }
 }
 
 /* 计时器信息窗样式 */
@@ -868,11 +895,10 @@
     width: 90%;
     max-width: 600px;
     background: linear-gradient(135deg,
-        rgba(255, 182, 193, 0.08) 0%,
-        rgba(255, 255, 255, 0.03) 100%
-    );
+            rgba(255, 182, 193, 0.08) 0%,
+            rgba(255, 255, 255, 0.03) 100%);
     border: 1px solid rgba(255, 182, 193, 0.15);
-    box-shadow: 
+    box-shadow:
         0 20px 50px rgba(0, 0, 0, 0.3),
         inset 0 0 0 1px rgba(255, 182, 193, 0.1),
         inset 0 0 30px rgba(255, 182, 193, 0.05);
@@ -894,18 +920,16 @@
     width: 100%;
     height: 1px;
     background: linear-gradient(90deg,
-        transparent,
-        rgba(255, 182, 193, 0.3),
-        transparent
-    );
+            transparent,
+            rgba(255, 182, 193, 0.3),
+            transparent);
 }
 
 .love-theme .dialog-header h3 {
     font-size: 2rem;
     background: linear-gradient(135deg,
-        rgba(255, 182, 193, 0.95),
-        rgba(255, 255, 255, 0.8)
-    );
+            rgba(255, 182, 193, 0.95),
+            rgba(255, 255, 255, 0.8));
     -webkit-background-clip: text;
     -moz-background-clip: text;
     -ms-background-clip: text;
@@ -946,11 +970,9 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: radial-gradient(
-        circle,
-        rgba(255, 182, 193, 0.2) 0%,
-        transparent 70%
-    );
+    background: radial-gradient(circle,
+            rgba(255, 182, 193, 0.2) 0%,
+            transparent 70%);
     filter: blur(10px);
     animation: iconGlow 3s ease-in-out infinite alternate;
 }
@@ -988,11 +1010,9 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-        135deg,
-        rgba(255, 255, 255, 0.1),
-        transparent
-    );
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.1),
+            transparent);
     opacity: 0;
     transition: opacity 0.3s ease;
 }
@@ -1000,7 +1020,7 @@
 .timer-item:hover {
     transform: translateY(-5px) scale(1.05);
     background: rgba(255, 182, 193, 0.08);
-    box-shadow: 
+    box-shadow:
         0 10px 30px rgba(255, 182, 193, 0.1),
         inset 0 0 20px rgba(255, 182, 193, 0.05);
 }
@@ -1014,9 +1034,8 @@
     font-weight: bold;
     font-family: 'Noto Sans SC', monospace;
     background: linear-gradient(135deg,
-        rgba(255, 182, 193, 0.9),
-        rgba(255, 255, 255, 0.9)
-    );
+            rgba(255, 182, 193, 0.9),
+            rgba(255, 255, 255, 0.9));
     -webkit-background-clip: text;
     -moz-background-clip: text;
     -ms-background-clip: text;
@@ -1056,12 +1075,10 @@
     left: 0;
     width: 100%;
     height: 1px;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 182, 193, 0.3),
-        transparent
-    );
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 182, 193, 0.3),
+            transparent);
 }
 
 .timer-footer p {
@@ -1081,24 +1098,39 @@
 
 /* 动画效果 */
 @keyframes heartFloat {
-    0%, 100% { transform: translateY(0) scale(1); }
-    50% { transform: translateY(-10px) scale(1.1); }
+
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+    }
+
+    50% {
+        transform: translateY(-10px) scale(1.1);
+    }
 }
 
 @keyframes iconGlow {
-    0% { opacity: 0.3; transform: translate(-50%, -50%) scale(0.8); }
-    100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.2); }
+    0% {
+        opacity: 0.3;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+
+    100% {
+        opacity: 0.6;
+        transform: translate(-50%, -50%) scale(1.2);
+    }
 }
 
 @keyframes loveGlow {
     0% {
-        box-shadow: 
+        box-shadow:
             0 20px 50px rgba(0, 0, 0, 0.3),
             inset 0 0 0 1px rgba(255, 182, 193, 0.1),
             inset 0 0 30px rgba(255, 182, 193, 0.05);
     }
+
     100% {
-        box-shadow: 
+        box-shadow:
             0 20px 50px rgba(0, 0, 0, 0.3),
             inset 0 0 0 1px rgba(255, 182, 193, 0.2),
             inset 0 0 50px rgba(255, 182, 193, 0.1);
@@ -1106,8 +1138,13 @@
 }
 
 @keyframes quoteGlow {
-    from { text-shadow: 0 0 5px rgba(255, 182, 193, 0.5); }
-    to { text-shadow: 0 0 15px rgba(255, 182, 193, 0.8); }
+    from {
+        text-shadow: 0 0 5px rgba(255, 182, 193, 0.5);
+    }
+
+    to {
+        text-shadow: 0 0 15px rgba(255, 182, 193, 0.8);
+    }
 }
 
 /* 响应式调整 */
@@ -1182,11 +1219,9 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(
-        circle at center,
-        rgba(255, 182, 193, 0.2),
-        transparent 70%
-    );
+    background: radial-gradient(circle at center,
+            rgba(255, 182, 193, 0.2),
+            transparent 70%);
     opacity: 0;
     transition: all 0.3s ease;
 }
@@ -1199,12 +1234,10 @@
     left: -50%;
     width: 200%;
     height: 200%;
-    background: linear-gradient(
-        45deg,
-        transparent,
-        rgba(255, 182, 193, 0.1),
-        transparent
-    );
+    background: linear-gradient(45deg,
+            transparent,
+            rgba(255, 182, 193, 0.1),
+            transparent);
     transform: rotate(45deg);
     transition: all 0.5s ease;
 }
@@ -1214,7 +1247,7 @@
     transform: rotate(180deg) scale(1.1);
     border-color: rgba(255, 182, 193, 0.4);
     background: rgba(255, 182, 193, 0.1);
-    box-shadow: 
+    box-shadow:
         0 0 20px rgba(255, 182, 193, 0.2),
         inset 0 0 10px rgba(255, 182, 193, 0.1);
     color: rgba(255, 255, 255, 0.95);
@@ -1233,7 +1266,7 @@
 .love-theme .close-btn:active {
     transform: rotate(180deg) scale(0.95);
     border-color: rgba(255, 182, 193, 0.5);
-    box-shadow: 
+    box-shadow:
         0 0 15px rgba(255, 182, 193, 0.15),
         inset 0 0 15px rgba(255, 182, 193, 0.15);
 }
@@ -1241,12 +1274,13 @@
 /* 动画效果 */
 @keyframes closeButtonGlow {
     0% {
-        box-shadow: 
+        box-shadow:
             0 0 15px rgba(255, 182, 193, 0.1),
             inset 0 0 5px rgba(255, 182, 193, 0.1);
     }
+
     100% {
-        box-shadow: 
+        box-shadow:
             0 0 20px rgba(255, 182, 193, 0.2),
             inset 0 0 10px rgba(255, 182, 193, 0.2);
     }
@@ -1283,12 +1317,11 @@
     padding: 2.5rem;
     overflow: hidden;
     background: linear-gradient(135deg,
-        rgba(255, 182, 193, 0.05) 0%,
-        rgba(255, 255, 255, 0.02) 100%
-    );
+            rgba(255, 182, 193, 0.05) 0%,
+            rgba(255, 255, 255, 0.02) 100%);
     border-radius: 20px;
     border: 1px solid rgba(255, 182, 193, 0.1);
-    box-shadow: 
+    box-shadow:
         0 10px 30px rgba(0, 0, 0, 0.1),
         inset 0 0 20px rgba(255, 182, 193, 0.05);
 }
@@ -1313,9 +1346,8 @@
     font-size: 1.1rem;
     margin-top: 2rem;
     background: linear-gradient(135deg,
-        rgba(255, 182, 193, 0.9),
-        rgba(255, 255, 255, 0.9)
-    );
+            rgba(255, 182, 193, 0.9),
+            rgba(255, 255, 255, 0.9));
     -webkit-background-clip: text;
     -moz-background-clip: text;
     -ms-background-clip: text;
@@ -1332,13 +1364,11 @@
     position: absolute;
     width: var(--size);
     height: var(--size);
-    background: radial-gradient(
-        circle at 30% 30%,
-        rgba(255, 182, 193, 0.4) 0%,
-        rgba(255, 182, 193, 0.2) 30%,
-        rgba(255, 182, 193, 0.1) 60%,
-        transparent 100%
-    );
+    background: radial-gradient(circle at 30% 30%,
+            rgba(255, 182, 193, 0.4) 0%,
+            rgba(255, 182, 193, 0.2) 30%,
+            rgba(255, 182, 193, 0.1) 60%,
+            transparent 100%);
     border-radius: 50%;
     animation: floatBubble var(--duration, 15s) ease-in-out infinite;
     opacity: 0;
@@ -1350,14 +1380,17 @@
         transform: translateY(100vh) scale(0) rotate(0deg);
         opacity: 0;
     }
+
     20% {
         opacity: var(--bubble-opacity, 0.4);
         transform: translateY(80vh) scale(0.8) rotate(45deg);
     }
+
     80% {
         opacity: var(--bubble-opacity, 0.4);
         transform: translateY(20vh) scale(1) rotate(135deg);
     }
+
     100% {
         transform: translateY(-20vh) scale(0.8) rotate(180deg);
         opacity: 0;
@@ -1365,25 +1398,72 @@
 }
 
 /* 泡泡个性化设置 */
-.bubble:nth-child(1) { --size: 30px; --duration: 15s; --bubble-opacity: 0.4; left: 10%; }
-.bubble:nth-child(2) { --size: 20px; --duration: 18s; --bubble-opacity: 0.3; left: 20%; animation-delay: -2s; }
-.bubble:nth-child(3) { --size: 25px; --duration: 12s; --bubble-opacity: 0.5; left: 35%; animation-delay: -4s; }
-.bubble:nth-child(4) { --size: 15px; --duration: 20s; --bubble-opacity: 0.3; left: 50%; animation-delay: -6s; }
-.bubble:nth-child(5) { --size: 35px; --duration: 16s; --bubble-opacity: 0.4; left: 65%; animation-delay: -8s; }
-.bubble:nth-child(6) { --size: 28px; --duration: 14s; --bubble-opacity: 0.35; left: 80%; animation-delay: -10s; }
-.bubble:nth-child(7) { --size: 22px; --duration: 17s; --bubble-opacity: 0.45; left: 90%; animation-delay: -12s; }
+.bubble:nth-child(1) {
+    --size: 30px;
+    --duration: 15s;
+    --bubble-opacity: 0.4;
+    left: 10%;
+}
+
+.bubble:nth-child(2) {
+    --size: 20px;
+    --duration: 18s;
+    --bubble-opacity: 0.3;
+    left: 20%;
+    animation-delay: -2s;
+}
+
+.bubble:nth-child(3) {
+    --size: 25px;
+    --duration: 12s;
+    --bubble-opacity: 0.5;
+    left: 35%;
+    animation-delay: -4s;
+}
+
+.bubble:nth-child(4) {
+    --size: 15px;
+    --duration: 20s;
+    --bubble-opacity: 0.3;
+    left: 50%;
+    animation-delay: -6s;
+}
+
+.bubble:nth-child(5) {
+    --size: 35px;
+    --duration: 16s;
+    --bubble-opacity: 0.4;
+    left: 65%;
+    animation-delay: -8s;
+}
+
+.bubble:nth-child(6) {
+    --size: 28px;
+    --duration: 14s;
+    --bubble-opacity: 0.35;
+    left: 80%;
+    animation-delay: -10s;
+}
+
+.bubble:nth-child(7) {
+    --size: 22px;
+    --duration: 17s;
+    --bubble-opacity: 0.45;
+    left: 90%;
+    animation-delay: -12s;
+}
 
 /* 响应式调整 */
 @media (max-width: 768px) {
     .love-words {
         padding: 2rem 1.5rem;
     }
-    
+
     .love-words .content {
         font-size: 1.2rem;
         padding: 0;
     }
-    
+
     .love-words .from {
         font-size: 1rem;
         padding-right: 0.5rem;
@@ -1395,9 +1475,8 @@
     position: relative;
     overflow: hidden;
     background: linear-gradient(135deg,
-        rgba(255, 182, 193, 0.12) 0%,
-        rgba(255, 182, 193, 0.05) 100%
-    );
+            rgba(255, 182, 193, 0.12) 0%,
+            rgba(255, 182, 193, 0.05) 100%);
     border: 1px solid rgba(255, 182, 193, 0.25);
     border-radius: 25px;
     padding: 1rem 2.5rem;
@@ -1408,7 +1487,7 @@
     cursor: pointer;
     transform-style: preserve-3d;
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    box-shadow: 
+    box-shadow:
         0 5px 15px rgba(255, 182, 193, 0.1),
         inset 0 0 20px rgba(255, 182, 193, 0.05);
 }
@@ -1421,11 +1500,9 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(
-        circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-        rgba(255, 182, 193, 0.15) 0%,
-        transparent 70%
-    );
+    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+            rgba(255, 182, 193, 0.15) 0%,
+            transparent 70%);
     opacity: 0;
     transition: opacity 0.3s ease;
     pointer-events: none;
@@ -1438,12 +1515,11 @@
     position: absolute;
     inset: -1px;
     background: linear-gradient(135deg,
-        rgba(255, 182, 193, 0.5),
-        transparent 50%,
-        rgba(255, 182, 193, 0.3)
-    );
+            rgba(255, 182, 193, 0.5),
+            transparent 50%,
+            rgba(255, 182, 193, 0.3));
     border-radius: 25px;
-    mask: 
+    mask:
         linear-gradient(#fff 0 0) content-box,
         linear-gradient(#fff 0 0);
     mask-composite: exclude;
@@ -1475,11 +1551,10 @@
 .refresh-btn:hover {
     transform: translateY(-3px) scale(1.02);
     background: linear-gradient(135deg,
-        rgba(255, 182, 193, 0.18) 0%,
-        rgba(255, 182, 193, 0.08) 100%
-    );
+            rgba(255, 182, 193, 0.18) 0%,
+            rgba(255, 182, 193, 0.08) 100%);
     border-color: rgba(255, 182, 193, 0.4);
-    box-shadow: 
+    box-shadow:
         0 8px 25px rgba(255, 182, 193, 0.2),
         inset 0 0 30px rgba(255, 182, 193, 0.1);
 }
@@ -1501,7 +1576,7 @@
 /* 点击效果 */
 .refresh-btn:active {
     transform: translateY(-1px) scale(0.98);
-    box-shadow: 
+    box-shadow:
         0 5px 15px rgba(255, 182, 193, 0.15),
         inset 0 0 20px rgba(255, 182, 193, 0.08);
 }
@@ -1512,7 +1587,7 @@
         padding: 0.8rem 2rem;
         font-size: 1rem;
     }
-    
+
     .heart-icon {
         font-size: 1.1rem;
     }
@@ -1523,9 +1598,8 @@
     position: relative;
     margin-bottom: 2rem;
     background: linear-gradient(135deg,
-        rgba(173, 216, 230, 0.08) 0%,
-        rgba(255, 255, 255, 0.02) 100%
-    ) !important;
+            rgba(173, 216, 230, 0.08) 0%,
+            rgba(255, 255, 255, 0.02) 100%) !important;
     border: 1px solid rgba(173, 216, 230, 0.15) !important;
     border-radius: 25px !important;
     padding: 1rem !important;
@@ -1533,7 +1607,7 @@
     align-items: center !important;
     gap: 1rem !important;
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-    box-shadow: 
+    box-shadow:
         0 5px 15px rgba(0, 0, 0, 0.1),
         inset 0 0 20px rgba(173, 216, 230, 0.05) !important;
 }
@@ -1563,9 +1637,8 @@
 .wiki-search-btn {
     position: relative !important;
     background: linear-gradient(135deg,
-        rgba(173, 216, 230, 0.12) 0%,
-        rgba(173, 216, 230, 0.05) 100%
-    ) !important;
+            rgba(173, 216, 230, 0.12) 0%,
+            rgba(173, 216, 230, 0.05) 100%) !important;
     border: 1px solid rgba(173, 216, 230, 0.25) !important;
     border-radius: 20px !important;
     padding: 0.9rem 2rem !important;
@@ -1578,7 +1651,7 @@
     gap: 0.8rem !important;
     white-space: nowrap !important;
     transform-style: preserve-3d !important;
-    box-shadow: 
+    box-shadow:
         0 5px 15px rgba(173, 216, 230, 0.1),
         inset 0 0 20px rgba(173, 216, 230, 0.05) !important;
 }
@@ -1591,11 +1664,9 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(
-        circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-        rgba(173, 216, 230, 0.15) 0%,
-        transparent 70%
-    );
+    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+            rgba(173, 216, 230, 0.15) 0%,
+            transparent 70%);
     opacity: 0;
     transition: opacity 0.3s ease;
     pointer-events: none;
@@ -1608,12 +1679,11 @@
     position: absolute;
     inset: -1px;
     background: linear-gradient(135deg,
-        rgba(173, 216, 230, 0.5),
-        transparent 50%,
-        rgba(173, 216, 230, 0.3)
-    );
+            rgba(173, 216, 230, 0.5),
+            transparent 50%,
+            rgba(173, 216, 230, 0.3));
     border-radius: 20px;
-    mask: 
+    mask:
         linear-gradient(#fff 0 0) content-box,
         linear-gradient(#fff 0 0);
     mask-composite: exclude;
@@ -1633,7 +1703,7 @@
 .search-box:focus-within {
     border-color: rgba(173, 216, 230, 0.3) !important;
     transform: translateY(-2px);
-    box-shadow: 
+    box-shadow:
         0 8px 25px rgba(173, 216, 230, 0.15),
         inset 0 0 30px rgba(173, 216, 230, 0.1) !important;
 }
@@ -1642,11 +1712,10 @@
 .wiki-search-btn:hover {
     transform: translateY(-2px) scale(1.02) !important;
     background: linear-gradient(135deg,
-        rgba(173, 216, 230, 0.18) 0%,
-        rgba(173, 216, 230, 0.08) 100%
-    ) !important;
+            rgba(173, 216, 230, 0.18) 0%,
+            rgba(173, 216, 230, 0.08) 100%) !important;
     border-color: rgba(173, 216, 230, 0.4) !important;
-    box-shadow: 
+    box-shadow:
         0 8px 25px rgba(173, 216, 230, 0.2),
         inset 0 0 30px rgba(173, 216, 230, 0.1) !important;
 }
@@ -1668,7 +1737,7 @@
 /* 搜索按钮点击效果 */
 .wiki-search-btn:active {
     transform: translateY(-1px) scale(0.98) !important;
-    box-shadow: 
+    box-shadow:
         0 5px 15px rgba(173, 216, 230, 0.15),
         inset 0 0 20px rgba(173, 216, 230, 0.08) !important;
 }
@@ -1688,9 +1757,8 @@
 /* 食物卡片样式 */
 .food-item {
     background: linear-gradient(135deg,
-        rgba(255, 255, 255, 0.05) 0%,
-        rgba(255, 255, 255, 0.02) 100%
-    );
+            rgba(255, 255, 255, 0.05) 0%,
+            rgba(255, 255, 255, 0.02) 100%);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 15px;
     padding: 1.5rem;
@@ -1707,11 +1775,9 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(
-        circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-        rgba(173, 216, 230, 0.1) 0%,
-        transparent 60%
-    );
+    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+            rgba(173, 216, 230, 0.1) 0%,
+            transparent 60%);
     opacity: 0;
     transition: opacity 0.3s ease;
 }
@@ -1719,7 +1785,7 @@
 .food-item:hover {
     transform: translateY(-5px);
     border-color: rgba(173, 216, 230, 0.2);
-    box-shadow: 
+    box-shadow:
         0 10px 20px rgba(0, 0, 0, 0.2),
         0 0 30px rgba(173, 216, 230, 0.1);
 }
@@ -1738,9 +1804,8 @@
     color: rgba(255, 255, 255, 0.9);
     margin-bottom: 1rem;
     background: linear-gradient(135deg,
-        rgba(173, 216, 230, 0.9),
-        rgba(255, 255, 255, 0.9)
-    );
+            rgba(173, 216, 230, 0.9),
+            rgba(255, 255, 255, 0.9));
     -webkit-background-clip: text;
     -moz-background-clip: text;
     -ms-background-clip: text;
@@ -1797,10 +1862,9 @@
     flex: 1;
     height: 1px;
     background: linear-gradient(90deg,
-        transparent,
-        rgba(173, 216, 230, 0.3),
-        transparent
-    );
+            transparent,
+            rgba(173, 216, 230, 0.3),
+            transparent);
 }
 
 .end-text {
@@ -1899,9 +1963,8 @@
     width: 90%;
     max-width: 500px;
     background: linear-gradient(135deg,
-        rgba(173, 216, 230, 0.08) 0%,
-        rgba(255, 255, 255, 0.03) 100%
-    );
+            rgba(173, 216, 230, 0.08) 0%,
+            rgba(255, 255, 255, 0.03) 100%);
     border: 1px solid rgba(173, 216, 230, 0.15);
     border-radius: 20px;
     padding: 0;
@@ -1927,9 +1990,8 @@
     margin: 0;
     font-size: 1.8rem;
     background: linear-gradient(135deg,
-        rgba(173, 216, 230, 0.95),
-        rgba(255, 255, 255, 0.8)
-    );
+            rgba(173, 216, 230, 0.95),
+            rgba(255, 255, 255, 0.8));
     -webkit-background-clip: text;
     -moz-background-clip: text;
     -ms-background-clip: text;
@@ -1971,9 +2033,8 @@
     font-size: 2.5rem;
     font-weight: bold;
     background: linear-gradient(135deg,
-        rgba(173, 216, 230, 0.95),
-        rgba(255, 255, 255, 0.8)
-    );
+            rgba(173, 216, 230, 0.95),
+            rgba(255, 255, 255, 0.8));
     -webkit-background-clip: text;
     -moz-background-clip: text;
     -ms-background-clip: text;
@@ -2134,422 +2195,1367 @@
     }
 }
 
-    /* 关闭按钮样式 */
-    .info-dialog .close-btn {
-        position: absolute;
-        right: 1.5rem;
-        top: 1.5rem;
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        border: 1px solid rgba(173, 216, 230, 0.2);
-        background: rgba(173, 216, 230, 0.05);
-        color: rgba(255, 255, 255, 0.8);
-        font-size: 1.2rem;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.3s ease;
-    }
+/* 关闭按钮样式 */
+.info-dialog .close-btn {
+    position: absolute;
+    right: 1.5rem;
+    top: 1.5rem;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid rgba(173, 216, 230, 0.2);
+    background: rgba(173, 216, 230, 0.05);
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
 
-    .info-dialog .close-btn:hover {
-        transform: rotate(180deg);
-        background: rgba(173, 216, 230, 0.1);
-        border-color: rgba(173, 216, 230, 0.3);
-        box-shadow: 0 0 15px rgba(173, 216, 230, 0.2);
-    }
+.info-dialog .close-btn:hover {
+    transform: rotate(180deg);
+    background: rgba(173, 216, 230, 0.1);
+    border-color: rgba(173, 216, 230, 0.3);
+    box-shadow: 0 0 15px rgba(173, 216, 230, 0.2);
+}
 
-    /* 搜索标签样式 */
-    .search-tabs {
-        display: flex;
-        gap: 1rem;
-        margin-bottom: 1.5rem;
-        padding: 0 0.5rem;
-    }
+/* 搜索标签样式 */
+.search-tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 0 0.5rem;
+}
 
-    .tab-btn {
-        flex: 1;
-        background: linear-gradient(135deg,
+.tab-btn {
+    flex: 1;
+    background: linear-gradient(135deg,
             rgba(173, 216, 230, 0.08) 0%,
-            rgba(255, 255, 255, 0.02) 100%
-        );
-        border: 1px solid rgba(173, 216, 230, 0.15);
-        border-radius: 15px;
-        padding: 0.8rem;
-        color: rgba(255, 255, 255, 0.7);
-        font-size: 1rem;
-        cursor: pointer;
-        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
-    }
+            rgba(255, 255, 255, 0.02) 100%);
+    border: 1px solid rgba(173, 216, 230, 0.15);
+    border-radius: 15px;
+    padding: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
 
-    .tab-btn.active {
-        background: linear-gradient(135deg,
+.tab-btn.active {
+    background: linear-gradient(135deg,
             rgba(173, 216, 230, 0.15) 0%,
-            rgba(173, 216, 230, 0.05) 100%
-        );
-        border-color: rgba(173, 216, 230, 0.3);
-        color: rgba(255, 255, 255, 0.95);
-        transform: translateY(-2px);
-        box-shadow: 
-            0 5px 15px rgba(173, 216, 230, 0.1),
-            inset 0 0 20px rgba(173, 216, 230, 0.05);
+            rgba(173, 216, 230, 0.05) 100%);
+    border-color: rgba(173, 216, 230, 0.3);
+    color: rgba(255, 255, 255, 0.95);
+    transform: translateY(-2px);
+    box-shadow:
+        0 5px 15px rgba(173, 216, 230, 0.1),
+        inset 0 0 20px rgba(173, 216, 230, 0.05);
+}
+
+.tab-icon {
+    font-size: 1.2rem;
+}
+
+/* 搜索面板样式 */
+.search-panel {
+    display: none;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+.search-panel.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 功能按钮区域样式优化 */
+.button-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* 情话卡片样式 - 信封形状 */
+.glass-btn:nth-child(1) {
+    position: relative;
+    width: 300px;
+    height: 200px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: linear-gradient(135deg,
+            rgba(255, 182, 193, 0.08) 0%,
+            rgba(255, 255, 255, 0.02) 100%);
+    border: 1px solid rgba(255, 182, 193, 0.15);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* 信封翻盖效果 */
+.glass-btn:nth-child(1)::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg,
+            rgba(255, 182, 193, 0.1) 0%,
+            rgba(255, 255, 255, 0.03) 100%);
+    clip-path: polygon(0 0, 50% 50%, 100% 0);
+    border-radius: 10px 10px 0 0;
+    transform-origin: top;
+    transition: all 0.4s ease;
+    border-bottom: 1px solid rgba(255, 182, 193, 0.2);
+}
+
+/* 信封底部三角形 */
+.glass-btn:nth-child(1)::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(135deg,
+            rgba(255, 182, 193, 0.1) 0%,
+            rgba(255, 255, 255, 0.03) 100%);
+    clip-path: polygon(0 100%, 50% 50%, 100% 100%);
+    border-radius: 0 0 10px 10px;
+}
+
+/* 信封内容容器 */
+.glass-btn:nth-child(1) .btn-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    transform: translateZ(20px);
+}
+
+/* 信封图标样式 */
+.glass-btn:nth-child(1) .btn-icon {
+    font-size: 2.5rem;
+    color: rgba(255, 182, 193, 0.9);
+    text-shadow: 0 0 10px rgba(255, 182, 193, 0.3);
+    transform: translateZ(30px);
+}
+
+/* 信封文字样式 */
+.glass-btn:nth-child(1) span:not(.btn-icon) {
+    font-size: 1.3rem;
+    background: linear-gradient(135deg,
+            rgba(255, 182, 193, 0.95),
+            rgba(255, 255, 255, 0.9));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transform: translateZ(25px);
+}
+
+/* 信封装饰线 */
+.glass-btn:nth-child(1) .envelope-line {
+    position: absolute;
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+    border: 1px solid rgba(255, 182, 193, 0.2);
+    border-radius: 9px;
+    pointer-events: none;
+}
+
+/* 信封悬浮效果 */
+.glass-btn:nth-child(1):hover {
+    transform: translateY(-5px) rotateX(10deg);
+    border-color: rgba(255, 182, 193, 0.25);
+    box-shadow:
+        0 20px 40px rgba(255, 182, 193, 0.1),
+        inset 0 0 30px rgba(255, 182, 193, 0.1);
+}
+
+.glass-btn:nth-child(1):hover::before {
+    transform: rotateX(-20deg);
+    border-color: rgba(255, 182, 193, 0.3);
+}
+
+/* 信封光晕效果 */
+.glass-btn:nth-child(1) .envelope-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+            rgba(255, 182, 193, 0.15) 0%,
+            transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    border-radius: 10px;
+}
+
+.glass-btn:nth-child(1):hover .envelope-glow {
+    opacity: 1;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .glass-btn:nth-child(1) {
+        width: 260px;
+        height: 180px;
+        padding: 1.5rem;
     }
 
-    .tab-icon {
+    .glass-btn:nth-child(1) .btn-icon {
+        font-size: 2.2rem;
+    }
+
+    .glass-btn:nth-child(1) span:not(.btn-icon) {
+        font-size: 1.1rem;
+    }
+}
+
+/* 百科卡片样式 - 书本形状 */
+.glass-btn:nth-child(2) {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: linear-gradient(135deg,
+            rgba(173, 216, 230, 0.08) 0%,
+            rgba(255, 255, 255, 0.02) 100%);
+    border: 1px solid rgba(173, 216, 230, 0.15);
+    border-radius: 5px 15px 15px 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* 书脊效果优化 */
+.glass-btn:nth-child(2)::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 30px;
+    height: 100%;
+    background: rgba(173, 216, 230, 0.1);
+    border-right: 1px solid rgba(173, 216, 230, 0.2);
+    border-radius: 5px 0 0 5px;
+    transform: translateX(-15px) rotateY(-45deg);
+    transform-origin: right;
+}
+
+/* 书页效果优化 */
+.glass-btn:nth-child(2)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right,
+            rgba(173, 216, 230, 0.05) 0%,
+            rgba(255, 255, 255, 0.02) 100%);
+    border-radius: 0 15px 15px 0;
+    transform: translateZ(-1px);
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* 书本内页效果 */
+.glass-btn:nth-child(2) .book-pages {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: calc(100% - 30px);
+    height: 100%;
+    transform-origin: left;
+    transform-style: preserve-3d;
+}
+
+.glass-btn:nth-child(2) .book-pages::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.02);
+    transform: rotateY(0deg);
+    backface-visibility: hidden;
+    border-radius: 0 15px 15px 0;
+    border: 1px solid rgba(173, 216, 230, 0.1);
+}
+
+/* 百科卡片悬浮效果优化 */
+.glass-btn:nth-child(2):hover {
+    transform: translateX(-20px) rotateY(-20deg);
+    border-color: rgba(173, 216, 230, 0.25);
+}
+
+.glass-btn:nth-child(2):hover .book-pages {
+    transform: rotateY(-20deg);
+}
+
+.glass-btn:nth-child(2):hover::before {
+    transform: translateX(-20px) rotateY(-35deg);
+}
+
+/* 卡片内容样式 */
+.btn-icon {
+    font-size: 3rem;
+    position: relative;
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+.glass-btn span:not(.btn-icon) {
+    font-size: 1.4rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.95),
+            rgba(255, 255, 255, 0.8));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .button-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 1.5rem;
+    }
+
+    .glass-btn:nth-child(1) {
+        width: 260px;
+        height: 180px;
+    }
+
+    .glass-btn:nth-child(2) {
+        width: 260px;
+        height: 260px;
+    }
+}
+
+/* 按钮容器样式 */
+.button-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+    padding: 0 2rem;
+}
+
+/* 情话卡片样式调整 */
+.love-words {
+    position: relative;
+    padding: 2.5rem;
+    margin-bottom: 0;
+    /* 移除底部间距 */
+}
+
+/* 调整情话内容区域 */
+.love-words .content {
+    margin-bottom: 1.5rem;
+}
+
+.love-words .from {
+    margin-bottom: 0;
+    /* 移除底部间距 */
+}
+
+/* 优化按钮在移动端的显示 */
+@media (max-width: 768px) {
+    .button-wrapper {
+        margin-top: 2rem;
+        padding: 0 1rem;
+    }
+
+    .love-words {
+        padding: 2rem 1.5rem;
+    }
+}
+
+/* 百科弹窗响应式设计 */
+@media screen and (max-width: 768px) {
+
+    /* 搜索框响应式 */
+    .sub-page .search-box {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        padding: 0.8rem !important;
+        gap: 0.8rem !important;
+        width: 100% !important;
+    }
+
+    .sub-page .search-input {
+        flex: 1 1 auto !important;
+        min-width: 0 !important;
+        width: auto !important;
+        font-size: 14px !important;
+        padding: 8px 15px !important;
+    }
+
+    .sub-page .wiki-search-btn {
+        flex: 0 0 auto !important;
+        width: auto !important;
+        min-width: 100px !important;
+        padding: 8px 15px !important;
+        white-space: nowrap !important;
+        justify-content: center !important;
+    }
+
+    /* 食物详情弹窗响应式 */
+    .sub-page .food-detail-modal {
+        width: 95% !important;
+        max-width: none !important;
+        margin: 10px auto !important;
+    }
+
+    .sub-page .food-detail-content {
+        padding: 15px !important;
+    }
+
+    .sub-page .food-detail-header {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 1rem !important;
+    }
+
+    .sub-page .food-detail-header img {
+        width: 100px !important;
+        height: 100px !important;
+        margin-bottom: 10px !important;
+    }
+
+    .sub-page .food-detail-info {
+        padding-left: 0 !important;
+        align-items: center !important;
+    }
+
+    .sub-page .nutrition-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+    }
+
+    .sub-page .nutrition-item {
+        padding: 12px !important;
+    }
+
+    .sub-page .nutrition-icon {
+        font-size: 1.5rem !important;
+        margin-bottom: 8px !important;
+    }
+
+    .sub-page .nutrition-data .value {
+        font-size: 1.1rem !important;
+    }
+
+    .sub-page .details-grid {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+    }
+
+    .sub-page .food-description {
+        padding: 15px !important;
+        margin-top: 15px !important;
+    }
+}
+
+/* 更小屏幕的适配 */
+@media screen and (max-width: 480px) {
+    .sub-page .search-box {
+        flex-direction: column !important;
+    }
+
+    .sub-page .search-input,
+    .sub-page .wiki-search-btn {
+        width: 100% !important;
+    }
+
+    .sub-page .food-detail-modal {
+        width: 100% !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
+        height: 100vh !important;
+    }
+
+    .sub-page .nutrition-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .sub-page .food-detail-content {
+        padding: 10px !important;
+        height: calc(100vh - 60px) !important;
+        overflow-y: auto !important;
+    }
+
+    .sub-page .food-detail-header img {
+        width: 80px !important;
+        height: 80px !important;
+    }
+
+    .sub-page .nutrition-data .value {
+        font-size: 1rem !important;
+    }
+
+    .sub-page .nutrition-data .label {
+        font-size: 0.8rem !important;
+    }
+
+    .sub-page .detail-item {
+        padding: 10px !important;
+    }
+
+    .sub-page .detail-header h4 {
+        font-size: 0.9rem !important;
+    }
+
+    .sub-page .detail-item p {
+        font-size: 1rem !important;
+    }
+
+    .sub-page .food-description p {
+        font-size: 0.9rem !important;
+        line-height: 1.5 !important;
+    }
+}
+
+/* 食物详情弹窗响应式设计 */
+@media screen and (max-width: 768px) {
+    /* 食物详情弹窗 */
+    .info-dialog-overlay {
+        padding: 10px !important;
+    }
+
+    .info-dialog {
+        width: 95% !important;
+        max-width: none !important;
+        margin: 0 auto !important;
+    }
+
+    .info-dialog-content {
+        padding: 15px !important;
+    }
+
+    /* 食物详情头部 */
+    .food-header {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 1rem !important;
+    }
+
+    .food-icon {
+        font-size: 2.5rem !important;
+    }
+
+    .food-calory-big {
+        align-items: center !important;
+    }
+
+    .food-calory-big .number {
+        font-size: 2rem !important;
+    }
+
+    /* 营养成分网格 */
+    .nutrition-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+    }
+
+    .nutrition-item {
+        padding: 12px !important;
+    }
+
+    .nutrition-icon {
+        font-size: 1.5rem !important;
+        margin-bottom: 8px !important;
+    }
+
+    .nutrition-data .value {
+        font-size: 1.1rem !important;
+    }
+
+    /* 详细信息网格 */
+    .details-grid {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+    }
+
+    .food-description {
+        padding: 15px !important;
+        margin-top: 15px !important;
+    }
+}
+
+/* 更小屏幕的适配 */
+@media screen and (max-width: 480px) {
+    .info-dialog {
+        width: 100% !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
+        height: 100vh !important;
+    }
+
+    .info-dialog-overlay {
+        padding: 0 !important;
+    }
+
+    .nutrition-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .food-detail-content {
+        padding: 10px !important;
+        height: calc(100vh - 60px) !important;
+        overflow-y: auto !important;
+    }
+
+    .food-icon {
+        font-size: 2rem !important;
+    }
+
+    .food-calory-big .number {
+        font-size: 1.8rem !important;
+    }
+
+    .nutrition-data .value {
+        font-size: 1rem !important;
+    }
+
+    .nutrition-data .label {
+        font-size: 0.8rem !important;
+    }
+
+    .detail-item {
+        padding: 10px !important;
+    }
+
+    .detail-header h4 {
+        font-size: 0.9rem !important;
+    }
+
+    .detail-item p {
+        font-size: 1rem !important;
+    }
+
+    .food-description p {
+        font-size: 0.9rem !important;
+        line-height: 1.5 !important;
+    }
+}
+
+/* 食物详情内容样式 */
+.food-detail-content {
+    padding: 2rem;
+    color: rgba(255, 255, 255, 0.9);
+    max-height: 80vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(173, 216, 230, 0.3) transparent;
+}
+
+/* 基本信息区域 */
+.food-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(173, 216, 230, 0.1);
+}
+
+.food-title {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #64B5F6, #81D4FA);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.food-meta {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.health-tag {
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    background: rgba(46, 213, 115, 0.15);
+    color: rgba(46, 213, 115, 0.9);
+    border: 1px solid rgba(46, 213, 115, 0.3);
+}
+
+.health-tips {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+}
+
+.calory-display {
+    text-align: right;
+}
+
+.energy-info, .joule-info {
+    margin-bottom: 0.5rem;
+}
+
+.calory-value, .joule-value {
+    font-size: 2.4rem;
+    font-weight: bold;
+    background: linear-gradient(135deg, #64B5F6, #81D4FA);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.calory-unit, .joule-unit {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* 主要营养成分 */
+.main-nutrition {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.nutrition-card {
+    background: rgba(173, 216, 230, 0.05);
+    border: 1px solid rgba(173, 216, 230, 0.1);
+    border-radius: 15px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.nutrition-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #64B5F6, #81D4FA);
+    opacity: 0.5;
+}
+
+.nutrition-card:hover {
+    transform: translateY(-5px);
+    background: rgba(173, 216, 230, 0.08);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.nutrition-value {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0.5rem;
+    position: relative;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 0.5rem;
+}
+
+.nutrition-name {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 0.3rem;
+}
+
+.nutrition-unit {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.5);
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+.nutrition-card:hover .nutrition-unit {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* 详情区块通用样式 */
+.section-title {
+    font-size: 1.4rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 1.5rem;
+    padding-left: 1rem;
+    border-left: 4px solid #64B5F6;
+}
+
+/* 详情网格布局 */
+.fat-grid, .vitamin-grid, .mineral-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+}
+
+.detail-item {
+    background: rgba(173, 216, 230, 0.05);
+    border: 1px solid rgba(173, 216, 230, 0.1);
+    border-radius: 12px;
+    padding: 1rem;
+    transition: all 0.3s ease;
+}
+
+.detail-item:hover {
+    background: rgba(173, 216, 230, 0.08);
+    transform: translateY(-2px);
+}
+
+.detail-label {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 0.5rem;
+}
+
+.detail-value {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.9);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    transition: all 0.3s ease;
+}
+
+.detail-item:hover .detail-value {
+    -webkit-line-clamp: unset;
+    background: rgba(100, 181, 246, 0.1);
+    border-radius: 6px;
+    padding: 0.5rem;
+}
+
+/* 血糖指数信息 */
+.glycemic-info {
+    margin-bottom: 2.5rem;
+}
+
+.glycemic-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.glycemic-item {
+    background: rgba(173, 216, 230, 0.05);
+    border: 1px solid rgba(173, 216, 230, 0.1);
+    border-radius: 15px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.glycemic-item:hover {
+    transform: translateY(-5px);
+    background: rgba(173, 216, 230, 0.08);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.glycemic-header {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 1rem;
+}
+
+.glycemic-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0.5rem;
+    position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+.glycemic-item:hover .glycemic-value {
+    transform: scale(1.1);
+    background: linear-gradient(135deg, #64B5F6, #81D4FA);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* 添加脉冲动画效果 */
+@keyframes valuePulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(100, 181, 246, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(100, 181, 246, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(100, 181, 246, 0);
+    }
+}
+
+.nutrition-value:hover {
+    animation: valuePulse 1.5s infinite;
+}
+
+.glycemic-label {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* 健康建议 */
+.health-advice {
+    background: rgba(173, 216, 230, 0.05);
+    border: 1px solid rgba(173, 216, 230, 0.1);
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.advice-content {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 1024px) {
+    .main-nutrition {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .fat-grid, .vitamin-grid, .mineral-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .food-detail-content {
+        padding: 1.5rem;
+    }
+
+    .food-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+    }
+
+    .food-title {
+        font-size: 1.8rem;
+    }
+
+    .food-meta {
+        justify-content: center;
+    }
+
+    .calory-display {
+        text-align: center;
+    }
+
+    .main-nutrition {
+        gap: 1rem;
+    }
+
+    .nutrition-card {
+        padding: 1.2rem;
+    }
+
+    .nutrition-value {
+        font-size: 1.5rem;
+    }
+
+    .glycemic-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .main-nutrition {
+        grid-template-columns: 1fr;
+    }
+
+    .fat-grid, .vitamin-grid, .mineral-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-title {
         font-size: 1.2rem;
     }
 
-    /* 搜索面板样式 */
-    .search-panel {
-        display: none;
+    .detail-item {
+        padding: 0.8rem;
+    }
+
+    .detail-value {
+        font-size: 1.1rem;
+    }
+}
+
+/* 滚动条美化 */
+.food-detail-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.food-detail-content::-webkit-scrollbar-track {
+    background: rgba(173, 216, 230, 0.05);
+    border-radius: 3px;
+}
+
+.food-detail-content::-webkit-scrollbar-thumb {
+    background: rgba(173, 216, 230, 0.2);
+    border-radius: 3px;
+}
+
+.food-detail-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(173, 216, 230, 0.3);
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+    from {
         opacity: 0;
         transform: translateY(10px);
-        transition: all 0.3s ease;
     }
-
-    .search-panel.active {
-        display: block;
+    to {
         opacity: 1;
         transform: translateY(0);
     }
+}
 
-    /* 功能按钮区域样式优化 */
-    .button-container {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 3rem;
-        padding: 2rem;
-        max-width: 1200px;
-        margin: 0 auto;
-    }
+.food-detail-content > * {
+    animation: fadeIn 0.3s ease-out forwards;
+}
 
-    /* 情话卡片样式 - 信封形状 */
-    .glass-btn:nth-child(1) {
-        position: relative;
-        width: 300px;
-        height: 200px;
-        margin: 0 auto;
-        padding: 2rem;
-        background: linear-gradient(135deg,
-            rgba(255, 182, 193, 0.08) 0%,
-            rgba(255, 255, 255, 0.02) 100%
-        );
-        border: 1px solid rgba(255, 182, 193, 0.15);
-        border-radius: 10px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 1.5rem;
-        transform-style: preserve-3d;
-        perspective: 1000px;
-        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
+/* 食物详情动画效果 */
+.food-detail-content {
+    animation: fadeSlideUp 0.5s ease-out forwards;
+}
 
-    /* 信封翻盖效果 */
-    .glass-btn:nth-child(1)::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg,
-            rgba(255, 182, 193, 0.1) 0%,
-            rgba(255, 255, 255, 0.03) 100%
-        );
-        clip-path: polygon(0 0, 50% 50%, 100% 0);
-        border-radius: 10px 10px 0 0;
-        transform-origin: top;
-        transition: all 0.4s ease;
-        border-bottom: 1px solid rgba(255, 182, 193, 0.2);
-    }
+.food-header {
+    animation: fadeSlideDown 0.6s ease-out forwards;
+}
 
-    /* 信封底部三角形 */
-    .glass-btn:nth-child(1)::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 50%;
-        background: linear-gradient(135deg,
-            rgba(255, 182, 193, 0.1) 0%,
-            rgba(255, 255, 255, 0.03) 100%
-        );
-        clip-path: polygon(0 100%, 50% 50%, 100% 100%);
-        border-radius: 0 0 10px 10px;
-    }
+.main-nutrition {
+    animation: fadeScale 0.7s ease-out forwards;
+}
 
-    /* 信封内容容器 */
-    .glass-btn:nth-child(1) .btn-content {
-        position: relative;
-        z-index: 2;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-        transform: translateZ(20px);
-    }
+.nutrition-card {
+    animation: cardFloat 0.8s ease-out forwards;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
 
-    /* 信封图标样式 */
-    .glass-btn:nth-child(1) .btn-icon {
-        font-size: 2.5rem;
-        color: rgba(255, 182, 193, 0.9);
-        text-shadow: 0 0 10px rgba(255, 182, 193, 0.3);
-        transform: translateZ(30px);
-    }
+.nutrition-card:hover {
+    transform: translateY(-8px);
+    background: rgba(173, 216, 230, 0.1);
+    box-shadow: 
+        0 10px 20px rgba(0, 0, 0, 0.1),
+        0 6px 6px rgba(0, 0, 0, 0.1),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
 
-    /* 信封文字样式 */
-    .glass-btn:nth-child(1) span:not(.btn-icon) {
-        font-size: 1.3rem;
-        background: linear-gradient(135deg,
-            rgba(255, 182, 193, 0.95),
-            rgba(255, 255, 255, 0.9)
-        );
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        transform: translateZ(25px);
-    }
+.nutrition-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
 
-    /* 信封装饰线 */
-    .glass-btn:nth-child(1) .envelope-line {
-        position: absolute;
-        width: calc(100% - 4px);
-        height: calc(100% - 4px);
-        border: 1px solid rgba(255, 182, 193, 0.2);
-        border-radius: 9px;
-        pointer-events: none;
-    }
+.nutrition-card:hover::after {
+    opacity: 1;
+}
 
-    /* 信封悬浮效果 */
-    .glass-btn:nth-child(1):hover {
-        transform: translateY(-5px) rotateX(10deg);
-        border-color: rgba(255, 182, 193, 0.25);
-        box-shadow: 
-            0 20px 40px rgba(255, 182, 193, 0.1),
-            inset 0 0 30px rgba(255, 182, 193, 0.1);
-    }
+.section-title {
+    animation: fadeSlideRight 0.6s ease-out forwards;
+    position: relative;
+    overflow: hidden;
+}
 
-    .glass-btn:nth-child(1):hover::before {
-        transform: rotateX(-20deg);
-        border-color: rgba(255, 182, 193, 0.3);
-    }
+.section-title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, #64B5F6, transparent);
+    animation: lineGrow 0.6s ease-out forwards;
+}
 
-    /* 信封光晕效果 */
-    .glass-btn:nth-child(1) .envelope-glow {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: radial-gradient(
-            circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-            rgba(255, 182, 193, 0.15) 0%,
-            transparent 70%
-        );
+.detail-item {
+    animation: fadeIn 0.8s ease-out forwards;
+    transition: all 0.3s ease;
+}
+
+.detail-item:hover {
+    transform: translateY(-5px) scale(1.02);
+    background: rgba(173, 216, 230, 0.1);
+    box-shadow: 
+        0 8px 16px rgba(0, 0, 0, 0.1),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+/* 动画关键帧 */
+@keyframes fadeSlideUp {
+    from {
         opacity: 0;
-        transition: opacity 0.3s ease;
-        pointer-events: none;
-        border-radius: 10px;
+        transform: translateY(20px);
     }
-
-    .glass-btn:nth-child(1):hover .envelope-glow {
+    to {
         opacity: 1;
+        transform: translateY(0);
     }
+}
 
-    /* 响应式调整 */
-    @media (max-width: 768px) {
-        .glass-btn:nth-child(1) {
-            width: 260px;
-            height: 180px;
-            padding: 1.5rem;
-        }
-
-        .glass-btn:nth-child(1) .btn-icon {
-            font-size: 2.2rem;
-        }
-
-        .glass-btn:nth-child(1) span:not(.btn-icon) {
-            font-size: 1.1rem;
-        }
+@keyframes fadeSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
     }
-
-    /* 百科卡片样式 - 书本形状 */
-    .glass-btn:nth-child(2) {
-        position: relative;
-        width: 300px;
-        height: 300px;
-        margin: 0 auto;
-        padding: 2rem;
-        background: linear-gradient(135deg,
-            rgba(173, 216, 230, 0.08) 0%,
-            rgba(255, 255, 255, 0.02) 100%
-        );
-        border: 1px solid rgba(173, 216, 230, 0.15);
-        border-radius: 5px 15px 15px 5px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 1.5rem;
-        transform-style: preserve-3d;
-        perspective: 1000px;
-        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
+}
 
-    /* 书脊效果优化 */
-    .glass-btn:nth-child(2)::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 30px;
-        height: 100%;
-        background: rgba(173, 216, 230, 0.1);
-        border-right: 1px solid rgba(173, 216, 230, 0.2);
-        border-radius: 5px 0 0 5px;
-        transform: translateX(-15px) rotateY(-45deg);
-        transform-origin: right;
+@keyframes fadeSlideRight {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
     }
-
-    /* 书页效果优化 */
-    .glass-btn:nth-child(2)::after {
-        content: '';
-        position: absolute;
-        right: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(to right,
-            rgba(173, 216, 230, 0.05) 0%,
-            rgba(255, 255, 255, 0.02) 100%
-        );
-        border-radius: 0 15px 15px 0;
-        transform: translateZ(-1px);
-        box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+    to {
+        opacity: 1;
+        transform: translateX(0);
     }
+}
 
-    /* 书本内页效果 */
-    .glass-btn:nth-child(2) .book-pages {
-        position: absolute;
-        right: 0;
-        top: 0;
-        width: calc(100% - 30px);
-        height: 100%;
-        transform-origin: left;
-        transform-style: preserve-3d;
+@keyframes fadeScale {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
     }
-
-    .glass-btn:nth-child(2) .book-pages::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(255, 255, 255, 0.02);
-        transform: rotateY(0deg);
-        backface-visibility: hidden;
-        border-radius: 0 15px 15px 0;
-        border: 1px solid rgba(173, 216, 230, 0.1);
+    to {
+        opacity: 1;
+        transform: scale(1);
     }
+}
 
-    /* 百科卡片悬浮效果优化 */
-    .glass-btn:nth-child(2):hover {
-        transform: translateX(-20px) rotateY(-20deg);
-        border-color: rgba(173, 216, 230, 0.25);
+@keyframes cardFloat {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
     }
-
-    .glass-btn:nth-child(2):hover .book-pages {
-        transform: rotateY(-20deg);
+    100% {
+        opacity: 1;
+        transform: translateY(0);
     }
+}
 
-    .glass-btn:nth-child(2):hover::before {
-        transform: translateX(-20px) rotateY(-35deg);
+@keyframes lineGrow {
+    from {
+        transform: scaleX(0);
     }
-
-    /* 卡片内容样式 */
-    .btn-icon {
-        font-size: 3rem;
-        position: relative;
-        z-index: 2;
-        transition: all 0.3s ease;
+    to {
+        transform: scaleX(1);
     }
+}
 
-    .glass-btn span:not(.btn-icon) {
-        font-size: 1.4rem;
-        color: rgba(255, 255, 255, 0.9);
-        font-weight: 500;
-        position: relative;
-        z-index: 2;
-        background: linear-gradient(135deg,
-            rgba(255, 255, 255, 0.95),
-            rgba(255, 255, 255, 0.8)
-        );
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
+/* 添加交错动画延迟 */
+.nutrition-card:nth-child(1) { animation-delay: 0.1s; }
+.nutrition-card:nth-child(2) { animation-delay: 0.2s; }
+.nutrition-card:nth-child(3) { animation-delay: 0.3s; }
+.nutrition-card:nth-child(4) { animation-delay: 0.4s; }
+
+.detail-item:nth-child(odd) { animation-delay: 0.2s; }
+.detail-item:nth-child(even) { animation-delay: 0.3s; }
+
+/* 优化滚动体验 */
+.food-detail-content {
+    scroll-behavior: smooth;
+    scroll-padding: 20px;
+}
+
+/* 添加光晕效果 */
+.nutrition-value {
+    position: relative;
+}
+
+.nutrition-value::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle,
+        rgba(100, 181, 246, 0.2) 0%,
+        transparent 70%
+    );
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.nutrition-card:hover .nutrition-value::after {
+    opacity: 1;
+}
+
+/* 优化健康标签样式 */
+.health-tag {
+    position: relative;
+    overflow: hidden;
+}
+
+.health-tag::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    transform: rotate(45deg);
+    animation: shimmer 3s infinite linear;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%) rotate(45deg);
     }
-
-    /* 响应式调整 */
-    @media (max-width: 768px) {
-        .button-container {
-            grid-template-columns: 1fr;
-            gap: 2rem;
-            padding: 1.5rem;
-        }
-
-        .glass-btn:nth-child(1) {
-            width: 260px;
-            height: 180px;
-        }
-
-        .glass-btn:nth-child(2) {
-            width: 260px;
-            height: 260px;
-        }
+    100% {
+        transform: translateX(100%) rotate(45deg);
     }
+}
 
-    /* 按钮容器样式 */
-    .button-wrapper {
-        display: flex;
-        justify-content: center;
-        margin-top: 3rem;
-        padding: 0 2rem;
-    }
+/* 长数值悬浮展示效果 */
+.nutrition-card:hover .nutrition-value {
+    white-space: normal;
+    word-break: break-all;
+    background: rgba(100, 181, 246, 0.1);
+    border-radius: 8px;
+    transform: scale(0.9);
+    padding: 0.5rem;
+}
 
-    /* 情话卡片样式调整 */
-    .love-words {
-        position: relative;
-        padding: 2.5rem;
-        margin-bottom: 0;  /* 移除底部间距 */
-    }
+/* 添加提示框效果 */
+.nutrition-value[data-value-length="long"] {
+    cursor: pointer;
+}
 
-    /* 调整情话内容区域 */
-    .love-words .content {
-        margin-bottom: 1.5rem;
-    }
+.nutrition-value[data-value-length="long"]::before {
+    content: attr(data-full-value);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) scale(0.8);
+    background: rgba(100, 181, 246, 0.9);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+}
 
-    .love-words .from {
-        margin-bottom: 0;  /* 移除底部间距 */
-    }
+.nutrition-value[data-value-length="long"]:hover::before {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) scale(1);
+}
 
-    /* 优化按钮在移动端的显示 */
-    @media (max-width: 768px) {
-        .button-wrapper {
-            margin-top: 2rem;
-            padding: 0 1rem;
-        }
-        
-        .love-words {
-            padding: 2rem 1.5rem;
-        }
+/* 数值动画效果 */
+.nutrition-value {
+    animation: valueFloat 0.5s ease-out forwards;
+}
+
+@keyframes valueFloat {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
     }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 添加数值高亮动画 */
+@keyframes valueHighlight {
+    0% {
+        background-position: -100% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.nutrition-value.highlight {
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(100, 181, 246, 0.2) 50%,
+        transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: valueHighlight 2s ease-in-out infinite;
 }
