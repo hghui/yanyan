@@ -5,83 +5,164 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>H&Z - Our Sweet Memory</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="components.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- 通知容器 -->
     <div id="notification-container"></div>
 
-    <!-- 主页面内容 -->
+    <!-- 主容器 -->
     <div class="container">
-        <!-- 左侧面板 -->
-        <div class="left-panel">
-            <div class="logo-container">
-                <div class="logo-wrapper">
-                    <div class="logo-icon">H<span class="heart">&</span>Z</div>
-                    <div class="logo-glow"></div>
-                </div>
-                <div class="slogan-wrapper">
-                    <span class="slogan-text">年岁无忧</span>
-                    <span class="slogan-divider">·</span>
-                    <span class="slogan-text">快乐常在</span>
-                </div>
+        <!-- 顶部导航 -->
+        <nav class="nav-bar glass-card">
+            <div class="nav-left">
+                <div class="logo">H&Z</div>
             </div>
-        </div>
-
-        <!-- 分隔线 -->
-        <div class="panel-divider"></div>
-
-        <!-- 右侧面板 -->
-        <div class="right-panel">
-            <div class="button-container">
-                <button class="glass-btn" onclick="openSubPage('每日情话', fetchAndShowLoveWords, 'love-page')">
-                    <div class="envelope-line"></div>
-                    <div class="envelope-glow"></div>
-                    <div class="btn-content">
-                        <span class="btn-icon">💌</span>
-                        <span>每日情话</span>
+            <div class="nav-center">
+                <div class="timer-content">
+                    <div class="timer-item">
+                        <div class="timer-value" id="timer-days">0</div>
+                        <div class="timer-label">天</div>
                     </div>
-                </button>
-                <button class="glass-btn" onclick="openSubPage('百科大全', fetchAndShowFoodList, 'wiki-page')">
-                    <div class="book-pages"></div>
-                    <span class="btn-icon">🍽️</span>
-                    <span>百科大全</span>
+                    <div class="timer-item">
+                        <div class="timer-value" id="timer-hours">00</div>
+                        <div class="timer-label">小时</div>
+                    </div>
+                    <div class="timer-item">
+                        <div class="timer-value" id="timer-minutes">00</div>
+                        <div class="timer-label">分钟</div>
+                    </div>
+                    <div class="timer-item">
+                        <div class="timer-value" id="timer-seconds">00</div>
+                        <div class="timer-label">秒</div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-right">
+                <button class="nav-btn" onclick="toggleNotificationHistory()">
+                    <span class="icon">🔔</span>
                 </button>
             </div>
-        </div>
+        </nav>
+
+        <!-- 内容区域 -->
+        <main class="main-content">
+            <!-- 标题区域 -->
+            <div class="hero-section">
+                <h1 class="gradient-text">Our Sweet Memory</h1>
+                <p class="subtitle">记录我们的每一个瞬间</p>
+            </div>
+
+            <!-- 功能卡片网格 -->
+            <div class="features-grid">
+                <!-- 每日情话卡片 -->
+                <div class="feature-card glass-card" onclick="openSubPage('每日情话', fetchAndShowLoveWords)">
+                    <div class="card-content">
+                        <div class="card-icon">💌</div>
+                        <h3>每日情话</h3>
+                        <p>温暖的话语，浪漫的时光</p>
+                        <div class="card-shine"></div>
+                        <div class="card-border"></div>
+                    </div>
+                </div>
+                
+                <!-- 美食百科卡片 -->
+                <div class="feature-card glass-card" onclick="openSubPage('美食百科', fetchAndShowFoodList)">
+                    <div class="card-content">
+                        <div class="card-icon">🍽️</div>
+                        <h3>美食百科</h3>
+                        <p>探索美食，品味生活</p>
+                        <div class="card-shine"></div>
+                        <div class="card-border"></div>
+                    </div>
+                </div>
+
+                <!-- 纪念相册卡片 -->
+                <div class="feature-card glass-card" onclick="openSubPage('纪念相册', showPhotoAlbum)">
+                    <div class="card-content">
+                        <div class="card-icon">📸</div>
+                        <h3>纪念相册</h3>
+                        <p>记录美好，珍藏回忆</p>
+                        <div class="card-shine"></div>
+                        <div class="card-border"></div>
+                    </div>
+                </div>
+
+                <!-- 旅行地图卡片 -->
+                <div class="feature-card glass-card" onclick="openSubPage('旅行地图', showTravelMap)">
+                    <div class="card-content">
+                        <div class="card-icon">🗺️</div>
+                        <h3>旅行地图</h3>
+                        <p>足迹记录，未来规划</p>
+                        <div class="card-shine"></div>
+                        <div class="card-border"></div>
+                    </div>
+                </div>
+
+                <!-- 心愿清单卡片 -->
+                <div class="feature-card glass-card" onclick="openSubPage('心愿清单', showWishList)">
+                    <div class="card-content">
+                        <div class="card-icon">✨</div>
+                        <h3>心愿清单</h3>
+                        <p>共同期待，一起实现</p>
+                        <div class="card-shine"></div>
+                        <div class="card-border"></div>
+                    </div>
+                </div>
+
+                <!-- 纪念日历卡片 -->
+                <div class="feature-card glass-card" onclick="openSubPage('纪念日历', showMemoryCalendar)">
+                    <div class="card-content">
+                        <div class="card-icon">📅</div>
+                        <h3>纪念日历</h3>
+                        <p>重要时刻，永不错过</p>
+                        <div class="card-shine"></div>
+                        <div class="card-border"></div>
+                    </div>
+                </div>
+
+                <!-- 音乐播放器卡片 -->
+                <div class="feature-card glass-card" onclick="openSubPage('音乐播放器', showMusicPlayer)">
+                    <div class="card-content">
+                        <div class="card-icon">🎵</div>
+                        <h3>音乐播放器</h3>
+                        <p>专属歌单，共同喜好</p>
+                        <div class="card-shine"></div>
+                        <div class="card-border"></div>
+                    </div>
+                </div>
+
+                <!-- 留言板卡片 -->
+                <div class="feature-card glass-card" onclick="openSubPage('留言板', showMessageBoard)">
+                    <div class="card-content">
+                        <div class="card-icon">💭</div>
+                        <h3>留言板</h3>
+                        <p>点滴记录，温暖陪伴</p>
+                        <div class="card-shine"></div>
+                        <div class="card-border"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
 
     <!-- 子页面 -->
-    <div id="love-page" class="sub-page">
+    <div id="sub-page" class="sub-page">
         <div class="sub-page-content glass-card">
             <div class="page-header">
-                <h2>每日情话</h2>
-                <button class="close-btn" onclick="closeSubPage('love-page')">×</button>
+                <h2></h2>
+                <button class="close-btn" onclick="closeSubPage()">×</button>
             </div>
-            <div class="page-decoration">
-                <div class="decoration-line"></div>
-                <span class="decoration-icon">💌</span>
-                <div class="decoration-line"></div>
-            </div>
-            <div id="love-page-body" class="sub-page-body"></div>
+            <div class="page-body"></div>
         </div>
     </div>
 
-    <div id="wiki-page" class="sub-page">
-        <div class="sub-page-content glass-card">
-            <div class="page-header">
-                <h2>美食百科</h2>
-                <button class="close-btn" onclick="closeSubPage('wiki-page')">×</button>
-            </div>
-            <div class="page-decoration">
-                <div class="decoration-line"></div>
-                <span class="decoration-icon">🍽️</span>
-                <div class="decoration-line"></div>
-            </div>
-            <div id="wiki-page-body" class="sub-page-body">
-                <!-- 内容将由 JavaScript 动态加载 -->
-            </div>
+    <!-- 背景效果 -->
+    <div class="bg-overlay">
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
         </div>
     </div>
 
